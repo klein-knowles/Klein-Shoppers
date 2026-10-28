@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const db = require('../config/database');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this';
+const JWT_SECRET = process.env.JWT_SECRET || process.env.SESSION_SECRET;
 
 async function protect(req, res, next) {
     let token;
@@ -29,7 +29,7 @@ async function protect(req, res, next) {
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
         const [users] = await db.execute(
-            'SELECT id, full_name, email, role, status, is_admin FROM customers WHERE id = ?',
+            'SELECT id, first_name, last_name, email, status FROM customers WHERE id = ?',
             [decoded.id]
         );
         
@@ -37,7 +37,23 @@ async function protect(req, res, next) {
             return res.status(401).json({ error: 'User not found' });
         }
         
-        req.user = users[0];
+        if (users[0].status === "Blocked") {
+            return res.status(403).json({ error: "Account has been blocked." });
+        }
+
+        req.user = {
+            ...users[0],
+            role: "customer",
+            is_admin: false
+        };
+        if (req.session) {
+            req.session.customer = {
+                id: users[0].id,
+                first_name: users[0].first_name,
+                last_name: users[0].last_name,
+                email: users[0].email
+            };
+        }
         next();
     } catch (error) {
         res.status(401).json({ error: 'Not authorized, token failed' });

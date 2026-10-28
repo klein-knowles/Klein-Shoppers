@@ -5,6 +5,7 @@ const multer = require("multer");
 
 const Video = require("../models/Video");
 const Product = require("../models/productModel");
+const adminAuth = require("../middleware/adminAuth");
 
 const router = express.Router();
 const uploadDir = path.join(__dirname, "..", "public", "uploads", "videos");
@@ -46,7 +47,9 @@ const upload = multer({
             return cb(null, true);
         }
 
-        cb(new Error("Only MP4, WebM, MOV, M4V and OGG videos are allowed."));
+        const error = new Error("Only MP4, WebM, MOV, M4V and OGG videos are allowed.");
+        error.status = 400;
+        cb(error);
     },
     limits: {
         fileSize: Number(process.env.VIDEO_UPLOAD_LIMIT_MB || 200) * 1024 * 1024
@@ -174,7 +177,7 @@ router.post("/seller-upload", upload.single("video"), asyncHandler(async (req, r
     });
 }));
 
-router.post("/upload", upload.single("video"), asyncHandler(async (req, res) => {
+router.post("/upload", adminAuth, upload.single("video"), asyncHandler(async (req, res) => {
     if (!req.file) {
         return res.status(400).json({
             success: false,
@@ -207,7 +210,7 @@ router.post("/upload", upload.single("video"), asyncHandler(async (req, res) => 
     });
 }));
 
-router.post("/embed", express.json(), asyncHandler(async (req, res) => {
+router.post("/embed", adminAuth, express.json(), asyncHandler(async (req, res) => {
     const title = String(req.body.title || "").trim();
     const embedUrl = String(req.body.embedUrl || "").trim();
 
@@ -309,7 +312,7 @@ router.get("/:id/stream", asyncHandler(async (req, res) => {
     stream.pipe(res);
 }));
 
-router.delete("/:id", asyncHandler(async (req, res) => {
+router.delete("/:id", adminAuth, asyncHandler(async (req, res) => {
     const video = await Video.findById(req.params.id);
 
     if (!video) {

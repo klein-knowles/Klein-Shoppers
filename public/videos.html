@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos | Klein Shoppers</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/videos.css">
+</head>
+<body>
+    <header class="video-library-header">
+        <a href="/" class="brand-link">Klein Shoppers</a>
+        <a href="/products.html" class="shop-link">Shop</a>
+    </header>
+
+    <main class="video-library">
+        <section class="seller-video-panel" aria-labelledby="sellerVideoHeading">
+            <div class="seller-video-copy">
+                <p class="seller-video-kicker">Seller spotlight</p>
+                <h1 id="sellerVideoHeading">Show shoppers your product in action</h1>
+                <p>Upload a short product video and link it to an item in the Klein Shoppers catalog.</p>
+            </div>
+            <form id="sellerVideoForm" class="seller-video-form">
+                <label for="sellerVideoTitle">Video title</label>
+                <input id="sellerVideoTitle" name="title" type="text" maxlength="120" placeholder="What should shoppers know?" required>
+
+                <label for="sellerProductId">Product</label>
+                <select id="sellerProductId" name="productId" required>
+                    <option value="">Choose the product</option>
+                </select>
+
+                <label for="sellerVideoDescription">Description <span>(optional)</span></label>
+                <textarea id="sellerVideoDescription" name="description" rows="3" maxlength="2000" placeholder="Share details about the product"></textarea>
+
+                <label for="sellerVideoFile">Product video</label>
+                <input id="sellerVideoFile" name="video" type="file" accept="video/mp4,video/webm,video/quicktime,video/x-m4v,video/ogg" required>
+                <small>MP4, WebM, MOV, M4V or OGG. Maximum file size: 200 MB.</small>
+
+                <div class="seller-upload-progress" role="progressbar" aria-label="Upload progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <div id="sellerUploadProgressBar"></div>
+                </div>
+                <button id="sellerUploadButton" class="seller-upload-button" type="submit">Upload product video</button>
+                <p id="sellerUploadMessage" class="seller-upload-message" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <section class="video-watch">
+            <div id="featuredVideo" class="featured-video">
+                <p>Loading videos...</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="video-section-title">
+                <h2>Video Library</h2>
+                <p>Watch demos, announcements, and product videos.</p>
+            </div>
+            <div id="publicVideosGrid" class="public-videos-grid"></div>
+        </section>
+    </main>
+
+    <script src="/js/videos.js"></script>
+    <script src="/js/site-nav.js"></script>
+</body>
+</html>

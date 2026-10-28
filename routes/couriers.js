@@ -1,12 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const courierController = require('../controllers/courierController');
+const adminAuth = require('../middleware/adminAuth');
 
 // Public routes
 router.get('/', courierController.getCouriers);
 router.get('/search', courierController.searchCouriers);
 router.get('/statistics', courierController.getStatistics);
 router.get('/tracking/:trackingNumber', courierController.getTrackingByNumber);
+
+// Management endpoints expose and modify private delivery records.
+router.use(adminAuth);
 
 router.get('/:id', courierController.getCourierById);
 router.post('/', courierController.createCourier);

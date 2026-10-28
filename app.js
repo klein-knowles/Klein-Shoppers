@@ -1,54 +1,11 @@
-async function sendMessage(){
+// Keep the legacy `node app.js` command on the same application server as npm start.
+const app = require("./server");
 
-
-let input =
-document.getElementById("question");
-
-
-let message=input.value;
-
-
-
-document.getElementById("messages").innerHTML +=
-
-"<p><b>You:</b> "+message+"</p>";
-
-
-
-let response = await fetch(
-"http://localhost:5000/chat",
-{
-
-method:"POST",
-
-headers:{
-
-"Content-Type":"application/json"
-
-},
-
-body:JSON.stringify({
-
-message:message
-
-})
-
-
-});
-
-
-
-let data = await response.json();
-
-
-
-document.getElementById("messages").innerHTML +=
-
-"<p><b>Klein Assistant:</b> "+data.reply+"</p>";
-
-
-
-input.value="";
-
-
+if (require.main === module) {
+    app.startServer().catch(error => {
+        console.error("Klein Shoppers could not start:", error.code || error.message || "startup error");
+        process.exitCode = 1;
+    });
 }
+
+module.exports = app;

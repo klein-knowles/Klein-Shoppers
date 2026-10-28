@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 
 const reviewController = require("../controllers/reviewController");
+const customerAuth = require("../middleware/customerAuth");
+const adminAuth = require("../middleware/adminAuth");
 
 // ======================================
 // Add Review
@@ -10,6 +12,7 @@ const reviewController = require("../controllers/reviewController");
 
 router.post(
     "/add",
+    customerAuth,
     reviewController.addReview
 );
 
@@ -30,5 +33,7 @@ router.get(
     "/average/:productId",
     reviewController.getAverage
 );
+
+router.delete("/:id", adminAuth, reviewController.deleteReview);
 
 module.exports = router;

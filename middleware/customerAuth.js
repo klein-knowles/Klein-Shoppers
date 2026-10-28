@@ -14,6 +14,12 @@ module.exports = (req, res, next) => {
 
     try {
 
+        if (req.session && req.session.customer) {
+            req.customer = req.session.customer;
+            req.user = req.session.customer;
+            return next();
+        }
+
         let token = null;
 
         // ----------------------------------------
@@ -134,7 +140,7 @@ module.exports = (req, res, next) => {
 
                         }
 
-                        const customer = rows[0];
+                const customer = rows[0];
 
                         // ----------------------------
                         // Blocked
@@ -161,6 +167,15 @@ module.exports = (req, res, next) => {
                         }
 
                         req.customer = customer;
+                req.user = customer;
+                if (req.session) {
+                    req.session.customer = {
+                        id: customer.id,
+                        first_name: customer.first_name,
+                        last_name: customer.last_name,
+                        email: customer.email
+                    };
+                }
 
                         next();
 

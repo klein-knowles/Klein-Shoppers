@@ -25,8 +25,6 @@ async function verifyConnection() {
     }
 }
 
-verifyConnection();
-
 function saveLog(data) {
     Email.create({
         recipient: data.recipient,
@@ -137,6 +135,7 @@ async function sendTestEmail(email) {
 }
 
 module.exports = {
+    verifyConnection,
     sendEmail,
     sendNewsletter,
     sendPromotion,

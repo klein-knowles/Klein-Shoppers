@@ -1,5 +1,14 @@
 const mysql = require("mysql2");
 
+const production = process.env.NODE_ENV === "production";
+const required = ["DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME"];
+if (production) {
+    const missing = required.filter(name => !process.env[name]);
+    if (missing.length) {
+        throw new Error(`Missing production database settings: ${missing.join(", ")}.`);
+    }
+}
+
 const db = mysql.createPool({
     host: process.env.DB_HOST || "localhost",
     user: process.env.DB_USER || "root",
@@ -8,16 +17,6 @@ const db = mysql.createPool({
     waitForConnections: true,
     connectionLimit: Number(process.env.DB_POOL_LIMIT || 10),
     queueLimit: 0
-});
-
-db.getConnection((err, connection) => {
-    if (err) {
-        console.error("Database connection check failed:", err.message || err.code || err);
-        return;
-    }
-
-    console.log("Connected to MySQL Database.");
-    connection.release();
 });
 
 module.exports = db;

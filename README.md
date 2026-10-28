@@ -47,3 +47,7 @@ Open `http://localhost:5000/`.
 ## Install on a phone
 
 Host the folder on HTTPS, then open the site in a mobile browser and choose the browser's install or add-to-home-screen option. Localhost works for desktop testing, but real phones generally need an HTTPS-hosted URL.
+
+## Database setup
+
+Set the database variables in your local environment, then run `npm run db:migrate` to create or upgrade the MySQL schema. The migration is additive and repeatable; back up any existing production database first. Do not import the deprecated `Db.sql` file.

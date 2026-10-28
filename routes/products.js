@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const productController = require("../controllers/productController");
+const adminAuth = require("../middleware/adminAuth");
 
 // ======================================
 // Get all products
@@ -21,6 +22,6 @@ router.get("/:id", productController.getProduct);
 // Update product
 // ======================================
 
-router.put("/:id", productController.updateProduct);
+router.put("/:id", adminAuth, productController.updateProduct);
 
 module.exports = router;

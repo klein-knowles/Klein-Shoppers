@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "set NODE_ENV=development&& node server.js",
+    "db:migrate": "node scripts/migrate-db.js",
+    "i18n:build": "node scripts/translate-public-site.js",
     "check": "node scripts/check-js.js",
     "test": "npm run check"
   },

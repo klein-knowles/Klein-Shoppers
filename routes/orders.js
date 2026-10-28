@@ -7,6 +7,7 @@ require("../controllers/orderController");
 
 const adminAuth =
 require("../middleware/adminAuth");
+const customerAuth = require("../middleware/customerAuth");
 
 
 
@@ -16,6 +17,7 @@ require("../middleware/adminAuth");
 
 router.post(
     "/checkout",
+    customerAuth,
     orderController.checkout
 );
 
@@ -27,6 +29,7 @@ router.post(
 
 router.get(
     "/my-orders",
+    customerAuth,
     orderController.myOrders
 );
 

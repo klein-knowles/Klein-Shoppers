@@ -1,0 +1,162 @@
+.video-library-header {
+    align-items: center;
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    padding: 18px clamp(16px, 5vw, 64px);
+}
+
+.brand-link,
+.shop-link {
+    color: #0f172a;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.shop-link {
+    background: #2563eb;
+    border-radius: 6px;
+    color: #fff;
+    padding: 10px 16px;
+}
+
+.video-library {
+    margin: 0 auto;
+    max-width: 1180px;
+    padding: 28px 16px 56px;
+}
+
+.seller-video-panel {
+    align-items: start;
+    background: linear-gradient(135deg, #063b3f, #087e73);
+    border-radius: 16px;
+    color: #fff;
+    display: grid;
+    gap: clamp(24px, 5vw, 64px);
+    grid-template-columns: minmax(220px, 0.85fr) minmax(300px, 1fr);
+    margin-bottom: 36px;
+    padding: clamp(22px, 4vw, 42px);
+}
+
+.seller-video-copy { padding-top: 16px; }
+.seller-video-kicker { color: #bce4cc; font-size: 13px; font-weight: 700; letter-spacing: .08em; margin: 0 0 10px; text-transform: uppercase; }
+.seller-video-copy h1 { font-size: clamp(26px, 4vw, 38px); line-height: 1.1; margin: 0 0 14px; }
+.seller-video-copy > p:last-child { color: #e0f1ed; line-height: 1.6; margin: 0; }
+.seller-video-form { background: #fff; border-radius: 12px; color: #0f172a; display: grid; gap: 8px; padding: 22px; }
+.seller-video-form label { font-size: 14px; font-weight: 700; margin-top: 5px; }
+.seller-video-form label span,.seller-video-form small { color: #64748b; font-weight: 400; }
+.seller-video-form input,.seller-video-form select,.seller-video-form textarea { background: #fff; border: 1px solid #cbd5e1; border-radius: 7px; color: #0f172a; font: inherit; padding: 10px 12px; width: 100%; }
+.seller-video-form textarea { resize: vertical; }
+.seller-video-form small { font-size: 12px; line-height: 1.45; }
+.seller-upload-progress { background: #e2e8f0; border-radius: 999px; height: 8px; margin-top: 6px; overflow: hidden; }
+#sellerUploadProgressBar { background: #087e73; height: 100%; transition: width .2s ease; width: 0; }
+.seller-upload-button { background: #063b3f; border: 0; border-radius: 7px; color: #fff; cursor: pointer; font: inherit; font-weight: 700; margin-top: 4px; padding: 12px 16px; }
+.seller-upload-button:disabled { cursor: wait; opacity: .65; }
+.seller-upload-message { color: #475569; font-size: 13px; min-height: 18px; margin: 2px 0 0; }
+.seller-upload-message.success { color: #15803d; }
+.seller-upload-message.error { color: #b91c1c; }
+.video-product-link { font-weight: 600; }
+.video-product-link a { color: #087e73; }
+
+.video-watch {
+    margin-bottom: 32px;
+}
+
+.featured-video video {
+    aspect-ratio: 16 / 9;
+    background: #020617;
+    border-radius: 8px;
+    display: block;
+    width: 100%;
+}
+
+.featured-video h2 {
+    color: #0f172a;
+    font-size: 28px;
+    margin: 18px 0 8px;
+}
+
+.featured-video p,
+.video-section-title p,
+.public-video-card p {
+    color: #64748b;
+}
+
+.video-section-title {
+    align-items: end;
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.video-section-title h1 {
+    color: #0f172a;
+    margin: 0;
+}
+
+.video-section-title h2 { color: #0f172a; margin: 0; }
+
+.video-section-title p {
+    margin: 0;
+}
+
+.public-videos-grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.public-video-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.public-video-card button {
+    background: none;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+}
+
+.public-video-thumb {
+    align-items: center;
+    aspect-ratio: 16 / 9;
+    background: #0f172a;
+    color: #fff;
+    display: flex;
+    font-size: 20px;
+    font-weight: 700;
+    justify-content: center;
+}
+
+.public-video-body {
+    padding: 14px;
+}
+
+.public-video-body h2 {
+    color: #0f172a;
+    font-size: 17px;
+    line-height: 1.3;
+    margin: 0 0 6px;
+}
+
+.public-video-body p {
+    font-size: 14px;
+    margin: 0;
+}
+
+@media (max-width: 720px) {
+    .seller-video-panel { grid-template-columns: 1fr; }
+    .seller-video-copy { padding-top: 0; }
+    .video-section-title {
+        align-items: start;
+        flex-direction: column;
+    }
+}

@@ -562,6 +562,8 @@ exports.login = async (req, res) => {
 
                         sameSite: "strict",
 
+                        secure: process.env.NODE_ENV === "production",
+
                         maxAge:
 
                         1000 *
@@ -582,32 +584,43 @@ exports.login = async (req, res) => {
                 // RESPONSE
                 // -------------------------------------
 
-                res.json({
-
-                    success: true,
-
-                    message: "Login successful.",
-
-                    token,
-
-                    customer: {
-
-                        id: customer.id,
-
-                        first_name:
-
-                        customer.first_name,
-
-                        last_name:
-
-                        customer.last_name,
-
-                        email:
-
-                        customer.email
-
+                req.session.regenerate((sessionError) => {
+                    if (sessionError) {
+                        console.error("Customer session regeneration failed:", sessionError.code || "session error");
+                        return res.status(500).json({
+                            success: false,
+                            message: "Unable to start a secure session."
+                        });
                     }
 
+                    req.session.customer = {
+                        id: customer.id,
+                        first_name: customer.first_name,
+                        last_name: customer.last_name,
+                        email: customer.email
+                    };
+
+                    req.session.save((saveError) => {
+                        if (saveError) {
+                            console.error("Customer session save failed:", saveError.code || "session error");
+                            return res.status(500).json({
+                                success: false,
+                                message: "Unable to start a secure session."
+                            });
+                        }
+
+                        res.json({
+                            success: true,
+                            message: "Login successful.",
+                            token,
+                            customer: {
+                                id: customer.id,
+                                first_name: customer.first_name,
+                                last_name: customer.last_name,
+                                email: customer.email
+                            }
+                        });
+                    });
                 });
 
             }
@@ -637,27 +650,18 @@ exports.login = async (req, res) => {
 // =====================================================
 
 exports.logout = (req, res) => {
+    const cookieOptions = {
+        httpOnly: true,
+        sameSite: "strict",
+        secure: process.env.NODE_ENV === "production"
+    };
+    const respond = () => res
+        .clearCookie("customer_token", cookieOptions)
+        .clearCookie("remember_token", cookieOptions)
+        .json({ success: true, message: "Logged out successfully." });
 
-    res.clearCookie(
-
-        "customer_token"
-
-    );
-
-    res.clearCookie(
-
-        "remember_token"
-
-    );
-
-    res.json({
-
-        success: true,
-
-        message: "Logged out successfully."
-
-    });
-
+    if (req.session) return req.session.destroy(() => respond());
+    respond();
 };
 
 // =====================================================

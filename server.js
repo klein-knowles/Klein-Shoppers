@@ -6,16 +6,27 @@ const path = require("path");
 const crypto = require("crypto");
 const OpenAI = require("openai");
 const MySQLSessionStore = require("./config/sessionStore");
-
-require("./config/db");
+const db = require("./config/db");
+const adminAuth = require("./middleware/adminAuth");
 
 const app = express();
 const isProduction = process.env.NODE_ENV === "production";
 const PORT = Number(process.env.PORT || 3000);
 const SESSION_SECRET = process.env.SESSION_SECRET;
 
-if (isProduction && (!SESSION_SECRET || SESSION_SECRET.length < 32)) {
-    throw new Error("SESSION_SECRET must be set to a strong value of at least 32 characters in production.");
+if (isProduction) {
+    const required = ["DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME", "SESSION_SECRET", "JWT_SECRET"];
+    const missing = required.filter(name => {
+        const value = process.env[name] || "";
+        return value.length < (name.endsWith("_SECRET") ? 32 : 1) ||
+            /replace|example|placeholder|change_me|your_api/i.test(value);
+    });
+    if (missing.length) {
+        throw new Error(`Production configuration is incomplete: ${missing.join(", ")}.`);
+    }
+    if (process.env.SESSION_SECURE !== "true") {
+        throw new Error("SESSION_SECURE=true is required in production.");
+    }
 }
 
 app.disable("x-powered-by");
@@ -40,9 +51,10 @@ app.use(express.urlencoded({
     limit: process.env.FORM_LIMIT || "1mb"
 }));
 
+const sessionStore = isProduction ? new MySQLSessionStore() : undefined;
 app.use(session({
     name: process.env.SESSION_NAME || "klein.sid",
-    store: isProduction ? new MySQLSessionStore() : undefined,
+    store: sessionStore,
     secret: SESSION_SECRET || crypto.randomBytes(32).toString("hex"),
     resave: false,
     saveUninitialized: false,
@@ -57,6 +69,24 @@ app.use(session({
     }
 }));
 
+// Keep admin pages and admin APIs behind the same session check. Static code
+// assets remain public so the login page can render before a session exists.
+app.use("/admin", (req, res, next) => {
+    if (req.path === "/login.html" || req.path.startsWith("/css/") || req.path.startsWith("/js/") || req.path.startsWith("/auth/")) {
+        return next();
+    }
+    if (req.session && req.session.admin) return next();
+    if (req.method === "GET" && req.accepts("html")) {
+        return res.redirect("/admin/login.html");
+    }
+    return adminAuth(req, res, next);
+});
+
+// These top-level namespaces are administration APIs rather than shopper APIs.
+for (const route of ["/admins", "/dashboard", "/reports", "/stock", "/emails"]) {
+    app.use(route, adminAuth);
+}
+
 const staticOptions = {
     etag: true,
     maxAge: isProduction ? "1d" : 0
@@ -68,18 +98,30 @@ app.use("/uploads", express.static(path.join(__dirname, "public/uploads"), {
     maxAge: isProduction ? "7d" : 0
 }));
 
-app.get("/health", (req, res) => {
-    res.json({
-        ok: true,
-        service: "klein-shoppers",
-        environment: process.env.NODE_ENV || "development",
-        uptime: process.uptime()
-    });
+app.get("/health", async (req, res) => {
+    try {
+        await db.promise().query("SELECT 1");
+        if (sessionStore) await sessionStore.assertReady();
+        res.json({
+            ok: true,
+            service: "klein-shoppers",
+            environment: process.env.NODE_ENV || "development",
+            database: "connected",
+            uptime: process.uptime()
+        });
+    } catch (error) {
+        res.status(503).json({
+            ok: false,
+            service: "klein-shoppers",
+            database: "unavailable"
+        });
+    }
 });
 
 app.use("/admin/auth", require("./routes/adminAuth"));
 app.use("/customer", require("./routes/customerAuth"));
-app.use("/customers", require("./routes/customer"));
+app.use("/customers", require("./routes/customerAuth"));
+app.use("/customers", adminAuth, require("./routes/customer"));
 app.use("/products", require("./routes/products"));
 app.use("/admin/products", require("./routes/adminproducts"));
 app.use("/categories", require("./routes/categories"));
@@ -121,6 +163,8 @@ app.get("/shop", sendPublicFile("products.html"));
 app.get("/support", sendPublicFile("customer-service.html"));
 app.get("/support/tickets", sendPublicFile("customer-service.html"));
 app.get("/support/chat", sendPublicFile("customer-service.html"));
+app.get("/digital-services", sendPublicFile("digital-services.html"));
+app.get("/device-support", sendPublicFile("device-support.html"));
 app.get("/admin", sendPublicFile("admin", "index.html"));
 app.get("/admin/support", sendPublicFile("admin", "index.html"));
 app.get("/about", sendPublicFile("pages", "about.html"));
@@ -176,22 +220,50 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
     console.error(err);
 
-    res.status(err.status || 500).json({
+    const status = err.code === "LIMIT_FILE_SIZE" ? 413 : (err.status || 500);
+    const message = err.code === "LIMIT_FILE_SIZE"
+        ? "The uploaded file is too large."
+        : (status < 500 ? err.message : "Internal server error.");
+
+    res.status(status).json({
         success: false,
-        message: isProduction ? "Internal server error." : err.message
+        message: isProduction && status >= 500 ? "Internal server error." : message
     });
 });
 
-const server = app.listen(PORT, () => {
-    console.log(`Klein Shoppers running on http://localhost:${PORT}`);
-});
+async function startServer() {
+    await db.promise().query("SELECT 1");
+    if (sessionStore) await sessionStore.assertReady();
+    return new Promise((resolve, reject) => {
+        const server = app.listen(PORT, () => {
+            console.log(`Klein Shoppers running on port ${PORT}`);
+            resolve(server);
+        });
+        server.once("error", reject);
+    });
+}
+
+let server;
+if (require.main === module) {
+    startServer().then(startedServer => {
+        server = startedServer;
+    }).catch(error => {
+        console.error("Klein Shoppers could not start:", error.code || error.message || "startup error");
+        process.exitCode = 1;
+    });
+}
 
 function shutdown(signal) {
     console.log(`${signal} received. Closing server...`);
-    server.close(() => process.exit(0));
+    if (server) {
+        server.close(() => process.exit(0));
+    } else {
+        process.exit(0);
+    }
 }
 
 process.on("SIGINT", () => shutdown("SIGINT"));
 process.on("SIGTERM", () => shutdown("SIGTERM"));
 
 module.exports = app;
+module.exports.startServer = startServer;

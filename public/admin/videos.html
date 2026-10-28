@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Manager</title>
+    <link rel="stylesheet" href="/admin/css/admin.css">
+    <link rel="stylesheet" href="/admin/css/videos.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div id="sidebar"></div>
+        <div class="main">
+            <div id="topbar"></div>
+
+            <main class="content">
+                <div class="page-header">
+                    <div>
+                        <h2>Videos</h2>
+                        <p class="page-subtitle">Upload store videos and manage streamable media.</p>
+                    </div>
+                    <a href="/videos.html" class="btn-primary" target="_blank" rel="noopener">Open Video Library</a>
+                </div>
+
+                <section class="video-admin-grid">
+                    <form id="videoUploadForm" class="video-panel">
+                        <h3>Upload Video</h3>
+
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input id="title" name="title" type="text" placeholder="Product demo or announcement" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <input id="category" name="category" type="text" value="general">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productId">Product (optional)</label>
+                            <select id="productId" name="productId">
+                                <option value="">Store video (not linked to a product)</option>
+                            </select>
+                            <small>Choose a product to link this video to its product listing.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" rows="4" placeholder="Short description for viewers"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="video">Video File</label>
+                            <input id="video" name="video" type="file" accept="video/mp4,video/webm,video/quicktime,video/x-m4v,video/ogg" required>
+                            <small>MP4, WebM, MOV, M4V or OGG. Default max size is 200 MB.</small>
+                        </div>
+
+                        <div class="upload-progress" aria-live="polite">
+                            <div id="uploadProgressBar"></div>
+                        </div>
+
+                        <button class="btn-primary" type="submit" id="uploadButton">Upload Video</button>
+                        <p id="uploadMessage" class="form-message"></p>
+                    </form>
+
+                    <section class="video-panel">
+                        <h3>Preview</h3>
+                        <div id="selectedVideo" class="selected-video">
+                            <p class="muted">Choose a video from the list to preview it here.</p>
+                        </div>
+                    </section>
+                </section>
+
+                <section class="video-panel video-list-panel">
+                    <div class="section-header">
+                        <h3>Uploaded Videos</h3>
+                        <button class="btn-secondary" type="button" id="refreshVideos">Refresh</button>
+                    </div>
+                    <div id="videosGrid" class="videos-grid">
+                        <p class="muted">Loading videos...</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="/admin/js/admin.js"></script>
+    <script src="/admin/js/videos.js"></script>
+</body>
+</html>

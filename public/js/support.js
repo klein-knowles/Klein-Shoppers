@@ -2,8 +2,19 @@ const SupportSystem = {
     user: null,
     currentTicketId: null,
     chatInterval: null,
+    ticketTopic: null,
 
     init() {
+        const params = new URLSearchParams(window.location.search);
+        this.ticketTopic = params.get("topic");
+        const topicSubjects = {
+            "device-support": "Device support request",
+            "digital-services": "Digital services question"
+        };
+        if (topicSubjects[this.ticketTopic]) {
+            document.getElementById("subject").value = topicSubjects[this.ticketTopic];
+        }
+
         this.user = JSON.parse(localStorage.getItem("support_user") || "null");
         if (this.user) this.showDashboard();
     },
@@ -52,7 +63,7 @@ const SupportSystem = {
         document.getElementById("loginForm").style.display = "none";
         document.getElementById("dashboard").style.display = "block";
         document.getElementById("welcomeMessage").textContent = `Welcome, ${this.user.name}`;
-        this.showTab("tickets");
+        this.showTab(this.ticketTopic ? "newTicket" : "tickets");
     },
 
     showTab(tabName) {

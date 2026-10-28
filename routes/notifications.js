@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const notificationController = require('../controllers/notificationController');
+const adminAuth = require('../middleware/adminAuth');
+
+// Notifications are an administration feature in the current site.
+router.use(adminAuth);
 
 router.get('/', notificationController.getNotifications);
 router.get('/unread-count', notificationController.getUnreadCount);

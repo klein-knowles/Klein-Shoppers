@@ -3,6 +3,9 @@ const express = require("express");
 const router = express.Router();
 
 const cartController = require("../controllers/cartController");
+const customerAuth = require("../middleware/customerAuth");
+
+router.use(customerAuth);
 
 // ===========================================
 // View Cart

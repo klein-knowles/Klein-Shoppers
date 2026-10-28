@@ -39,20 +39,27 @@ SESSION_SECURE=false
 ## 3. Database
 
 1. Create the production database and user.
-2. Import `Db.sql`.
-3. Give the app user permissions for the app database only.
-4. Confirm the app can create the `sessions` table, or create it manually:
+2. Give the app user permissions to create and alter tables in the app database during migration.
+3. Set the production database variables in the service environment.
+4. Run the additive, repeatable migration against the selected database:
 
-```sql
-CREATE TABLE IF NOT EXISTS sessions (
-  sid VARCHAR(128) NOT NULL PRIMARY KEY,
-  sess JSON NOT NULL,
-  expires DATETIME NOT NULL,
-  INDEX idx_sessions_expires (expires)
-);
+```bash
+npm run db:migrate
 ```
 
-## 4. Install And Start
+The migration creates missing application tables and adds compatibility columns to the original schema. It does not drop tables or seed accounts. Back up an existing production database before applying it. Do not import the legacy `Db.sql`; it contains conflicting table definitions and development seed data.
+
+## 4. Languages
+
+The public site supports English, French, Swahili, Spanish, Punjabi, and Simplified Chinese. Generate the static translation files before publishing, using a valid OpenAI API key in the local environment:
+
+```bash
+npm run i18n:build
+```
+
+This writes the generated files to `public/i18n/`. Include those files in the deployment artifact; the site does not translate pages at runtime.
+
+## 5. Install And Start
 
 ```bash
 npm ci --omit=dev
@@ -68,10 +75,10 @@ curl https://your-domain.example/health
 Expected response:
 
 ```json
-{"ok":true,"service":"klein-shoppers"}
+{"ok":true,"service":"klein-shoppers","environment":"production","database":"connected"}
 ```
 
-## 5. Smoke Tests
+## 6. Smoke Tests
 
 - Open `/`
 - Open `/products.html`
@@ -85,10 +92,11 @@ Expected response:
 - Open `/admin/videos.html`
 - Open `/health`
 
-## 6. Before Going Live
+## 7. Before Going Live
 
-- Replace all placeholder SMTP and OpenAI values.
+- Configure real SMTP credentials, payment provider credentials, and an OpenAI API key if AI chat is enabled. Keep secrets in the hosting provider's secret store; never commit them.
 - Rotate any secrets that were ever committed or shared.
 - Confirm HTTPS is active before setting `SESSION_SECURE=true`.
 - Confirm `public/uploads` is backed up or mounted as persistent storage.
+- Mount persistent storage for `public/uploads/videos`; video metadata is stored in MySQL.
 - Run `npm test`.

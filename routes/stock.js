@@ -4,6 +4,9 @@ const router = express.Router();
 
 const stockController =
 require("../controllers/stockController");
+const adminAuth = require("../middleware/adminAuth");
+
+router.use(adminAuth);
 
 // Inventory
 

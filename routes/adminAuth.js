@@ -51,7 +51,7 @@ router.post("/login",(req,res)=>{
 
             }
 
-            if(admin.status!=="Active"){
+        if(String(admin.status || "active").toLowerCase() !== "active"){
 
                 return res.status(403).json({
 
@@ -63,24 +63,18 @@ router.post("/login",(req,res)=>{
 
             }
 
-            req.session.admin={
-
-                id:admin.id,
-
-                full_name:admin.full_name,
-
-                email:admin.email,
-
-                role:admin.role
-
-            };
-
-            res.json({
-
-                success:true,
-
-                admin:req.session.admin
-
+            req.session.regenerate(sessionError => {
+                if (sessionError) return res.status(500).json({ success: false, message: "Could not start a secure session." });
+                req.session.admin = {
+                    id: admin.id,
+                    full_name: admin.full_name || admin.fullname,
+                    email: admin.email,
+                    role: admin.role
+                };
+                req.session.save(saveError => {
+                    if (saveError) return res.status(500).json({ success: false, message: "Could not save the admin session." });
+                    res.json({ success: true, admin: req.session.admin });
+                });
             });
 
         });

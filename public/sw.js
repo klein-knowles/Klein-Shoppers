@@ -1,4 +1,4 @@
-const CACHE_NAME = "klein-shoppers-uganda-v7";
+const CACHE_NAME = "klein-shoppers-uganda-v8";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -6,6 +6,8 @@ const APP_SHELL = [
   "./departments.html",
   "./sell.html",
   "./customer-service.html",
+  "./digital-services.html",
+  "./device-support.html",
   "./account.html",
   "./orders.html",
   "./videos.html",

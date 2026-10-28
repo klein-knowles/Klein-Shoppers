@@ -1,158 +1,122 @@
-const fs = require("fs");
-const path = require("path");
+const { randomUUID } = require("crypto");
+const pool = require("../config/database");
 
-const dataDir = path.join(__dirname, "..", "database");
-const dataFile = path.join(dataDir, "videos.json");
+const columns = `
+    id AS _id, title, description, category, product_id AS productId, product_name AS productName,
+    video_type AS videoType, filename, original_name AS originalName, mime_type AS mimeType,
+    video_url AS videoUrl, stream_url AS streamUrl, embed_url AS embedUrl, file_size AS size,
+    uploaded_by AS uploadedBy, is_active AS isActive, views,
+    created_at AS createdAt, updated_at AS updatedAt
+`;
 
-function ensureStore() {
-    if (!fs.existsSync(dataDir)) {
-        fs.mkdirSync(dataDir, { recursive: true });
+function mapRow(row) {
+    if (!row) return null;
+    if (typeof row.uploadedBy === "string") {
+        try { row.uploadedBy = JSON.parse(row.uploadedBy); } catch { row.uploadedBy = null; }
     }
-
-    if (!fs.existsSync(dataFile)) {
-        fs.writeFileSync(dataFile, "[]");
-    }
-}
-
-function readVideos() {
-    ensureStore();
-
-    try {
-        return JSON.parse(fs.readFileSync(dataFile, "utf8"));
-    } catch (error) {
-        return [];
-    }
-}
-
-function writeVideos(videos) {
-    ensureStore();
-    fs.writeFileSync(dataFile, JSON.stringify(videos, null, 2));
-}
-
-function matchesFilter(video, filter) {
-    return Object.entries(filter || {}).every(([key, value]) => {
-        if (value === undefined || value === null || value === "") return true;
-        return String(video[key]) === String(value);
-    });
+    if (row.createdAt) row.createdAt = new Date(row.createdAt).toISOString();
+    if (row.updatedAt) row.updatedAt = new Date(row.updatedAt).toISOString();
+    return new VideoDocument(row);
 }
 
 class VideoDocument {
-    constructor(data) {
-        Object.assign(this, data);
-    }
+    constructor(data) { Object.assign(this, data); }
 
     async save() {
-        const videos = readVideos();
-        const index = videos.findIndex(video => video._id === this._id);
-
-        if (index >= 0) {
-            this.updatedAt = new Date().toISOString();
-            videos[index] = { ...this };
-            writeVideos(videos);
-        }
-
+        await pool.execute(
+            "UPDATE videos SET views = ?, is_active = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+            [Number(this.views || 0), this.isActive === false ? 0 : 1, this._id]
+        );
         return this;
     }
 
     async deleteOne() {
-        const videos = readVideos().filter(video => video._id !== this._id);
-        writeVideos(videos);
+        await pool.execute("DELETE FROM videos WHERE id = ?", [this._id]);
     }
 }
 
 class VideoQuery {
-    constructor(filter, single = false) {
-        this.filter = filter || {};
+    constructor(filter = {}, single = false) {
+        this.filter = filter;
         this.single = single;
         this.limitValue = null;
         this.skipValue = 0;
         this.sortValue = null;
     }
 
-    populate() {
-        return this;
-    }
+    sort(value) { this.sortValue = value; return this; }
+    limit(value) { this.limitValue = Number(value); return this; }
+    skip(value) { this.skipValue = Number(value); return this; }
 
-    sort(value) {
-        this.sortValue = value;
-        return this;
-    }
-
-    limit(value) {
-        this.limitValue = Number(value);
-        return this;
-    }
-
-    skip(value) {
-        this.skipValue = Number(value);
-        return this;
-    }
-
-    exec() {
-        let videos = readVideos().filter(video => matchesFilter(video, this.filter));
-
-        if (this.sortValue && this.sortValue.createdAt) {
-            const direction = Number(this.sortValue.createdAt);
-            videos = videos.sort((a, b) => {
-                const left = new Date(a.createdAt || 0).getTime();
-                const right = new Date(b.createdAt || 0).getTime();
-                return direction < 0 ? right - left : left - right;
-            });
+    async exec() {
+        const fields = { _id: "id", filename: "filename", isActive: "is_active", productId: "product_id", category: "category" };
+        const clauses = [];
+        const values = [];
+        for (const [key, value] of Object.entries(this.filter)) {
+            if (value === undefined || value === null || value === "") continue;
+            const column = fields[key];
+            if (!column) continue;
+            clauses.push(`\`${column}\` = ?`);
+            values.push(key === "isActive" ? (value ? 1 : 0) : value);
         }
 
-        if (this.skipValue) {
-            videos = videos.slice(this.skipValue);
+        let sql = `SELECT ${columns} FROM videos`;
+        if (clauses.length) sql += ` WHERE ${clauses.join(" AND ")}`;
+        const order = this.sortValue && this.sortValue.createdAt < 0 ? "DESC" : "ASC";
+        sql += ` ORDER BY created_at ${order}`;
+        if (this.limitValue && Number.isFinite(this.limitValue)) {
+            sql += " LIMIT ?";
+            values.push(Math.max(0, Math.min(this.limitValue, 100)));
+            if (this.skipValue > 0) {
+                sql += " OFFSET ?";
+                values.push(this.skipValue);
+            }
         }
 
-        if (this.limitValue) {
-            videos = videos.slice(0, this.limitValue);
-        }
-
-        if (this.single) {
-            const video = videos[0];
-            return Promise.resolve(video ? new VideoDocument(video) : null);
-        }
-
-        return Promise.resolve(videos.map(video => new VideoDocument(video)));
+        const [rows] = await pool.execute(sql, values);
+        if (this.single) return mapRow(rows[0]);
+        return rows.map(mapRow);
     }
 
-    then(resolve, reject) {
-        return this.exec().then(resolve, reject);
-    }
-
-    catch(reject) {
-        return this.exec().catch(reject);
-    }
+    then(resolve, reject) { return this.exec().then(resolve, reject); }
+    catch(reject) { return this.exec().catch(reject); }
 }
 
 module.exports = {
     async create(data) {
-        const now = new Date().toISOString();
-        const video = {
-            _id: `${Date.now()}-${Math.round(Math.random() * 1e9)}`,
-            views: 0,
-            isActive: true,
-            createdAt: now,
-            updatedAt: now,
-            ...data
-        };
-
-        const videos = readVideos();
-        videos.push(video);
-        writeVideos(videos);
-
-        return new VideoDocument(video);
+        const id = randomUUID();
+        await pool.execute(`
+            INSERT INTO videos (
+                id, title, description, category, product_id, product_name, video_type,
+                filename, original_name, mime_type, video_url, stream_url, embed_url,
+                file_size, uploaded_by, is_active, views
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 0)
+        `, [
+            id, data.title, data.description || "", data.category || "general", data.productId || null,
+            data.productName || null, data.videoType || "upload", data.filename || null,
+            data.originalName || null, data.mimeType || null, data.videoUrl || null, data.streamUrl || null,
+            data.embedUrl || null, data.size || null, JSON.stringify(data.uploadedBy || null)
+        ]);
+        return mapRow({ ...data, _id: id, views: 0, isActive: true, createdAt: new Date(), updatedAt: new Date() });
     },
 
-    find(filter) {
-        return new VideoQuery(filter);
-    },
+    find(filter) { return new VideoQuery(filter); },
 
-    findById(id) {
-        return new VideoQuery({ _id: id }, true);
-    },
+    findById(id) { return new VideoQuery({ _id: id }, true); },
 
-    async countDocuments(filter) {
-        return readVideos().filter(video => matchesFilter(video, filter)).length;
+    async countDocuments(filter = {}) {
+        const fields = { filename: "filename", isActive: "is_active", productId: "product_id", category: "category" };
+        const clauses = [];
+        const values = [];
+        for (const [key, value] of Object.entries(filter)) {
+            if (value === undefined || value === null || value === "" || !fields[key]) continue;
+            clauses.push(`\`${fields[key]}\` = ?`);
+            values.push(key === "isActive" ? (value ? 1 : 0) : value);
+        }
+        const [rows] = await pool.execute(
+            `SELECT COUNT(*) AS total FROM videos${clauses.length ? ` WHERE ${clauses.join(" AND ")}` : ""}`,
+            values
+        );
+        return Number(rows[0].total);
     }
 };

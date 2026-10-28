@@ -4,6 +4,9 @@ const router = express.Router();
 
 const wishlistController =
     require("../controllers/wishlistController");
+const customerAuth = require("../middleware/customerAuth");
+
+router.use(customerAuth);
 
 router.get(
     "/",

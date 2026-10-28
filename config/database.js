@@ -1,5 +1,12 @@
 const mysql = require("mysql2/promise");
 
+const production = process.env.NODE_ENV === "production";
+const required = ["DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME"];
+if (production) {
+    const missing = required.filter(name => !process.env[name]);
+    if (missing.length) throw new Error(`Missing production database settings: ${missing.join(", ")}.`);
+}
+
 const pool = mysql.createPool({
     host: process.env.DB_HOST || "localhost",
     user: process.env.DB_USER || "root",
