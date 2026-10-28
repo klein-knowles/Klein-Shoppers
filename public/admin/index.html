@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Klein Shoppers</title>
+    <link rel="stylesheet" href="/admin/css/admin.css">
+    <style>
+        .admin-home {
+            padding: 32px;
+        }
+
+        .admin-home h1 {
+            margin: 0 0 8px;
+        }
+
+        .admin-home p {
+            color: #64748b;
+            margin: 0 0 24px;
+        }
+
+        .admin-home-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .admin-home-card {
+            display: block;
+            padding: 18px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: #fff;
+            color: #1e293b;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+        }
+
+        .admin-home-card strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="sidebar"></div>
+        <div class="main">
+            <div id="topbar"></div>
+            <main class="admin-home">
+                <h1>Klein Shoppers Admin</h1>
+                <p>Manage store operations, products, orders, customers, support, content, and reporting.</p>
+
+                <section class="admin-home-grid" aria-label="Admin sections">
+                    <a class="admin-home-card" href="/admin/dashboard.html"><strong>Dashboard</strong>Sales, orders, and store performance.</a>
+                    <a class="admin-home-card" href="/admin/products.html"><strong>Products</strong>Add, edit, and manage catalog stock.</a>
+                    <a class="admin-home-card" href="/admin/orders.html"><strong>Orders</strong>Review customer orders and payment status.</a>
+                    <a class="admin-home-card" href="/admin/customers.html"><strong>Customers</strong>View customer records and account activity.</a>
+                    <a class="admin-home-card" href="/admin/reports.html"><strong>Reports</strong>Export and inspect sales reports.</a>
+                    <a class="admin-home-card" href="/admin/cms.html"><strong>CMS</strong>Edit pages, blog posts, and FAQs.</a>
+                    <a class="admin-home-card" href="/admin/settings.html"><strong>Settings</strong>Configure store, delivery, SEO, and email settings.</a>
+                    <a class="admin-home-card" href="/customer-service.html"><strong>Support</strong>Open the customer service center.</a>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="/admin/js/admin.js"></script>
+    <script>initLayout("Admin");</script>
+</body>
+</html>

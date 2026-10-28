@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Delivery Management - Klein Shoppers Admin</title>
+
+    <link rel="stylesheet" href="css/deliveries.css">
+</head>
+
+<body>
+
+<div class="admin-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <h2>Klein Shoppers</h2>
+
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li class="active"><a href="deliveries.html">Deliveries</a></li>
+            <li><a href="/admin/customers.html">Customers</a></li>
+            <li><a href="/admin/login.html">Logout</a></li>
+        </ul>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="content">
+
+
+        <header class="page-header">
+
+            <h1>Delivery Management</h1>
+
+            <button id="refreshBtn">
+                Refresh
+            </button>
+
+        </header>
+
+
+
+        <!-- Delivery Statistics -->
+
+        <section class="delivery-cards">
+
+            <div class="card">
+                <h3>Total Deliveries</h3>
+                <p id="totalDeliveries">0</p>
+            </div>
+
+
+            <div class="card pending">
+                <h3>Pending</h3>
+                <p id="pendingDeliveries">0</p>
+            </div>
+
+
+            <div class="card transit">
+                <h3>In Transit</h3>
+                <p id="transitDeliveries">0</p>
+            </div>
+
+
+            <div class="card completed">
+                <h3>Completed</h3>
+                <p id="completedDeliveries">0</p>
+            </div>
+
+        </section>
+
+
+
+        <!-- Filters -->
+
+        <section class="filters">
+
+            <select id="statusFilter">
+
+                <option value="">
+                    All Status
+                </option>
+
+                <option value="pending">
+                    Pending
+                </option>
+
+                <option value="assigned">
+                    Assigned
+                </option>
+
+                <option value="in_transit">
+                    In Transit
+                </option>
+
+                <option value="delivered">
+                    Delivered
+                </option>
+
+                <option value="cancelled">
+                    Cancelled
+                </option>
+
+            </select>
+
+
+
+            <input 
+                type="text"
+                id="searchDelivery"
+                placeholder="Search order/customer..."
+            >
+
+
+            <button id="searchBtn">
+                Search
+            </button>
+
+
+        </section>
+
+
+
+
+        <!-- Deliveries Table -->
+
+
+        <section class="table-section">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Delivery ID
+                        </th>
+
+
+                        <th>
+                            Order ID
+                        </th>
+
+
+                        <th>
+                            Customer
+                        </th>
+
+
+                        <th>
+                            Phone
+                        </th>
+
+
+                        <th>
+                            Address
+                        </th>
+
+
+                        <th>
+                            Rider
+                        </th>
+
+
+                        <th>
+                            Status
+                        </th>
+
+
+                        <th>
+                            Date
+                        </th>
+
+
+                        <th>
+                            Actions
+                        </th>
+
+
+                    </tr>
+
+
+                </thead>
+
+
+                <tbody id="deliveryTableBody">
+
+                    <!-- Data loaded dynamically -->
+
+                    <tr>
+
+                        <td colspan="9">
+                            Loading deliveries...
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </section>
+
+
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- Delivery Update Modal -->
+
+<div id="deliveryModal" class="modal">
+
+
+    <div class="modal-content">
+
+
+        <span class="close">
+            &times;
+        </span>
+
+
+        <h2>
+            Update Delivery
+        </h2>
+
+
+
+        <input 
+            type="hidden"
+            id="deliveryId"
+        >
+
+
+
+        <label>
+            Rider Name
+        </label>
+
+
+        <input 
+            type="text"
+            id="riderName"
+        >
+
+
+
+        <label>
+            Delivery Status
+        </label>
+
+
+        <select id="deliveryStatus">
+
+
+            <option value="pending">
+                Pending
+            </option>
+
+
+            <option value="assigned">
+                Assigned
+            </option>
+
+
+            <option value="in_transit">
+                In Transit
+            </option>
+
+
+            <option value="delivered">
+                Delivered
+            </option>
+
+
+            <option value="cancelled">
+                Cancelled
+            </option>
+
+
+        </select>
+
+
+
+
+        <button id="updateDeliveryBtn">
+            Save Changes
+        </button>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+<script src="js/deliveries.js"></script>
+
+
+</body>
+</html>

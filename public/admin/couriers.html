@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courier Management - Admin Panel</title>
+    <link rel="stylesheet" href="css/couriers.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="courier-container">
+        <!-- Header -->
+        <div class="courier-header">
+            <div class="header-left">
+                <h1><i class="fas fa-truck"></i> Courier Management</h1>
+                <span class="courier-count" id="totalCount">0</span>
+            </div>
+            <div class="header-right">
+                <button class="btn-add" id="addCourierBtn">
+                    <i class="fas fa-plus"></i> Add Courier
+                </button>
+                <button class="btn-refresh" id="refreshBtn">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-truck"></i></div>
+                <div class="stat-info">
+                    <h3 id="totalCouriers">0</h3>
+                    <p>Total Couriers</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-info">
+                    <h3 id="activeCouriers">0</h3>
+                    <p>Active</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-star"></i></div>
+                <div class="stat-info">
+                    <h3 id="avgRating">0.0</h3>
+                    <p>Average Rating</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-box"></i></div>
+                <div class="stat-info">
+                    <h3 id="totalDeliveries">0</h3>
+                    <p>Total Deliveries</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-section">
+            <div class="filter-group">
+                <label>Type:</label>
+                <select id="typeFilter" class="filter-select">
+                    <option value="all">All Types</option>
+                    <option value="MTN_UGANDA">MTN Uganda</option>
+                    <option value="dhl">DHL</option>
+                    <option value="fedex">FedEx</option>
+                    <option value="ups">UPS</option>
+                    <option value="rider">Rider</option>
+                    <option value="company_driver">Company Driver</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Status:</label>
+                <select id="statusFilter" class="filter-select">
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                    <option value="suspended">Suspended</option>
+                </select>
+            </div>
+            <div class="filter-group search-group">
+                <input type="text" id="searchInput" placeholder="Search couriers...">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+
+        <!-- Courier List -->
+        <div class="courier-list" id="courierList">
+            <!-- Couriers will be dynamically inserted here -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <i class="fas fa-truck"></i>
+            <h3>No Couriers Found</h3>
+            <p>Add your first courier to get started.</p>
+            <button class="btn-add" onclick="courierManager.showAddModal()">
+                <i class="fas fa-plus"></i> Add Courier
+            </button>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container" id="paginationContainer">
+            <div class="pagination-info" id="paginationInfo"></div>
+            <div class="pagination-buttons" id="paginationButtons"></div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal" id="courierModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"><i class="fas fa-truck"></i> Add Courier</h2>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="courierForm">
+                    <input type="hidden" id="courierId">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Name *</label>
+                            <input type="text" id="courierName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Type *</label>
+                            <select id="courierType" required>
+                                <option value="">Select Type</option>
+                                <option value="MTN_UGANDA">MTN Uganda</option>
+                                <option value="dhl">DHL</option>
+                                <option value="fedex">FedEx</option>
+                                <option value="ups">UPS</option>
+                                <option value="rider">Rider</option>
+                                <option value="company_driver">Company Driver</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="courierEmail">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone *</label>
+                            <input type="tel" id="courierPhone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Base Charge ($)</label>
+                            <input type="number" id="baseCharge" step="0.01" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Per KM Charge ($)</label>
+                            <input type="number" id="perKmCharge" step="0.01" min="0">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Delivery Time Estimate</label>
+                            <input type="text" id="deliveryTime" placeholder="e.g., 1-3 business days">
+                        </div>
+                        <div class="form-group">
+                            <label>Service Area</label>
+                            <input type="text" id="serviceArea" placeholder="e.g., International, National">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address</label>
+                        <textarea id="courierAddress" rows="2"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contact Person</label>
+                        <input type="text" id="contactPerson">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="courierStatus">
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="suspended">Suspended</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="courierManager.closeModal()">Cancel</button>
+                        <button type="submit" class="btn-submit" id="submitBtn">
+                            <i class="fas fa-save"></i> Save Courier
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tracking Modal -->
+    <div class="modal" id="trackingModal">
+        <div class="modal-content tracking-modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-map-marked-alt"></i> Tracking Details</h2>
+                <button class="modal-close" id="trackingModalClose">&times;</button>
+            </div>
+            <div class="modal-body" id="trackingBody">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/couriers.js"></script>
+</body>
+</html>

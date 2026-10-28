@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Returns & Refunds - Admin Panel</title>
+    <link rel="stylesheet" href="css/returns.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="returns-container">
+        <!-- Header -->
+        <div class="returns-header">
+            <div class="header-left">
+                <h1><i class="fas fa-undo-alt"></i> Returns & Refunds</h1>
+                <span class="returns-count" id="totalCount">0</span>
+            </div>
+            <div class="header-right">
+                <button class="btn-refresh" id="refreshBtn">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                <div class="stat-info">
+                    <h3 id="pendingReturns">0</h3>
+                    <p>Pending</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-info">
+                    <h3 id="approvedReturns">0</h3>
+                    <p>Approved</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-times-circle"></i></div>
+                <div class="stat-info">
+                    <h3 id="rejectedReturns">0</h3>
+                    <p>Rejected</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+                <div class="stat-info">
+                    <h3 id="totalRefunded">$0</h3>
+                    <p>Total Refunded</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-section">
+            <div class="filter-group">
+                <label>Status:</label>
+                <select id="statusFilter" class="filter-select">
+                    <option value="all">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="rejected">Rejected</option>
+                    <option value="processing">Processing</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="received">Received</option>
+                    <option value="refunded">Refunded</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Date From:</label>
+                <input type="date" id="dateFrom" class="filter-input">
+            </div>
+            <div class="filter-group">
+                <label>Date To:</label>
+                <input type="date" id="dateTo" class="filter-input">
+            </div>
+            <div class="filter-group search-group">
+                <input type="text" id="searchInput" placeholder="Search by #, customer, product...">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+
+        <!-- Returns List -->
+        <div class="returns-list" id="returnsList">
+            <!-- Returns will be dynamically inserted here -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <i class="fas fa-undo-alt"></i>
+            <h3>No Returns Found</h3>
+            <p>No return requests match your criteria.</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container" id="paginationContainer">
+            <div class="pagination-info" id="paginationInfo"></div>
+            <div class="pagination-buttons" id="paginationButtons"></div>
+        </div>
+    </div>
+
+    <!-- Return Detail Modal -->
+    <div class="modal" id="returnModal">
+        <div class="modal-content return-modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-undo-alt"></i> Return Details</h2>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body" id="returnDetails">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Update Modal -->
+    <div class="modal" id="statusModal">
+        <div class="modal-content status-modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-exchange-alt"></i> Update Status</h2>
+                <button class="modal-close" id="statusModalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="statusForm">
+                    <input type="hidden" id="statusReturnId">
+                    <div class="form-group">
+                        <label>Status *</label>
+                        <select id="updateStatus" required>
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approve</option>
+                            <option value="rejected">Reject</option>
+                            <option value="processing">Processing</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="received">Received</option>
+                            <option value="refunded">Refunded</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Note</label>
+                        <textarea id="statusNote" rows="3" placeholder="Add a note about this status change..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="returnManager.closeStatusModal()">Cancel</button>
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-save"></i> Update Status
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/returns.js"></script>
+</body>
+</html>

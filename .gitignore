@@ -1,0 +1,11 @@
+node_modules/
+.env
+.env.*
+!.env.example
+uploads/
+public/uploads/
+database/videos.json
+.vs/
+.vscode/
+desktop.ini
+npm-debug.log*

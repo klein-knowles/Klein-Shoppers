@@ -1,0 +1,535 @@
+/* ==========================================================
+   KLEIN SHOPPERS
+   WEBSITE SETTINGS
+========================================================== */
+
+body{
+    background:#f5f7fb;
+    font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+}
+
+/* ==========================================================
+   PAGE
+========================================================== */
+
+.container-fluid{
+    animation:fadeIn .35s ease;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* ==========================================================
+   SETTINGS CARDS
+========================================================== */
+
+.setting-card{
+
+    color:#fff;
+
+    border-radius:18px;
+
+    padding:28px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.setting-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.15);
+
+}
+
+.setting-card small{
+
+    display:block;
+
+    opacity:.9;
+
+    font-size:14px;
+
+    margin-bottom:10px;
+
+}
+
+.setting-card h3{
+
+    font-size:32px;
+
+    margin:0;
+
+    font-weight:700;
+
+}
+
+/* ==========================================================
+   CARDS
+========================================================== */
+
+.card{
+
+    border:none;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+
+}
+
+.card-header{
+
+    background:#fff;
+
+    border-bottom:1px solid #ececec;
+
+    padding:18px 25px;
+
+}
+
+.card-header h5{
+
+    margin:0;
+
+    font-weight:600;
+
+}
+
+.card-body{
+
+    padding:25px;
+
+}
+
+/* ==========================================================
+   SETTINGS MENU
+========================================================== */
+
+.list-group{
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+}
+
+.list-group-item{
+
+    border:none;
+
+    padding:15px 20px;
+
+    font-weight:500;
+
+    transition:.25s;
+
+}
+
+.list-group-item i{
+
+    width:24px;
+
+    margin-right:10px;
+
+}
+
+.list-group-item:hover{
+
+    background:#eef4ff;
+
+    color:#2563eb;
+
+}
+
+.list-group-item.active{
+
+    background:#2563eb;
+
+    color:#fff;
+
+}
+
+/* ==========================================================
+   FORM CONTROLS
+========================================================== */
+
+.form-control,
+
+.form-select{
+
+    min-height:46px;
+
+    border-radius:12px;
+
+    border:1px solid #dcdcdc;
+
+    transition:.25s;
+
+}
+
+.form-control:focus,
+
+.form-select:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 .18rem rgba(37,99,235,.18);
+
+}
+
+textarea.form-control{
+
+    min-height:120px;
+
+    resize:vertical;
+
+}
+
+.form-control-color{
+
+    width:100%;
+
+    height:46px;
+
+}
+
+/* ==========================================================
+   LOGO PREVIEW
+========================================================== */
+
+#logoPreview{
+
+    max-width:220px;
+
+    max-height:220px;
+
+    border-radius:14px;
+
+    border:1px solid #e5e5e5;
+
+    background:#fff;
+
+    padding:10px;
+
+    object-fit:contain;
+
+    transition:.3s;
+
+}
+
+#logoPreview:hover{
+
+    transform:scale(1.03);
+
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.btn{
+
+    border-radius:10px;
+
+    transition:.25s;
+
+}
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.btn-primary{
+
+    background:#2563eb;
+
+    border-color:#2563eb;
+
+}
+
+.btn-success{
+
+    background:#16a34a;
+
+    border-color:#16a34a;
+
+}
+
+.btn-danger{
+
+    background:#dc2626;
+
+    border-color:#dc2626;
+
+}
+
+/* ==========================================================
+   SWITCHES
+========================================================== */
+
+.form-check{
+
+    margin-bottom:15px;
+
+}
+
+.form-check-input{
+
+    width:48px;
+
+    height:24px;
+
+    cursor:pointer;
+
+}
+
+.form-check-label{
+
+    margin-left:10px;
+
+    font-weight:500;
+
+}
+
+/* ==========================================================
+   ALERTS
+========================================================== */
+
+.alert{
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:18px;
+
+}
+
+.alert i{
+
+    margin-right:8px;
+
+}
+
+/* ==========================================================
+   MODALS
+========================================================== */
+
+.modal-content{
+
+    border:none;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+}
+
+.modal-header{
+
+    padding:18px 24px;
+
+}
+
+.modal-body{
+
+    padding:24px;
+
+}
+
+.modal-footer{
+
+    padding:18px 24px;
+
+}
+
+/* ==========================================================
+   TOAST
+========================================================== */
+
+.toast{
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
+
+}
+
+/* ==========================================================
+   LOADING
+========================================================== */
+
+.spinner-border{
+
+    width:3rem;
+
+    height:3rem;
+
+}
+
+/* ==========================================================
+   TAB ANIMATION
+========================================================== */
+
+.tab-pane{
+
+    animation:slideFade .25s ease;
+
+}
+
+@keyframes slideFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(10px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f3f3f3;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#bfbfbf;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#8d8d8d;
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:992px){
+
+    .setting-card{
+
+        margin-bottom:18px;
+
+    }
+
+    .list-group{
+
+        margin-bottom:20px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .container-fluid{
+
+        padding:15px;
+
+    }
+
+    .card-body{
+
+        padding:18px;
+
+    }
+
+    .btn{
+
+        width:100%;
+
+        margin-bottom:10px;
+
+    }
+
+    #logoPreview{
+
+        margin-bottom:20px;
+
+    }
+
+    .setting-card{
+
+        text-align:center;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .setting-card h3{
+
+        font-size:26px;
+
+    }
+
+    .list-group-item{
+
+        font-size:14px;
+
+    }
+
+    .card-header h5{
+
+        font-size:18px;
+
+    }
+
+    .modal-body{
+
+        padding:18px;
+
+    }
+
+}

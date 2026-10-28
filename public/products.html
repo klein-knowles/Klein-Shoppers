@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Klein Shoppers</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header class="simple-page-header">
+        <a href="/" class="brand-link">Klein Shoppers</a>
+        <nav>
+            <a href="/cart.html">Cart</a>
+            <a href="/wishlist.html">Wishlist</a>
+            <a href="/account.html">Account</a>
+        </nav>
+    </header>
+
+    <main class="catalog-page">
+        <section class="catalog-heading">
+            <div>
+                <p class="eyebrow">Shop the catalog</p>
+                <h1>Find what you need</h1>
+            </div>
+            <a href="/" class="secondary-link">&larr; Back home</a>
+        </section>
+
+        <section class="filters" aria-label="Product filters">
+            <input type="text" id="search" placeholder="Search products...">
+            <select id="category"><option value="">All Categories</option></select>
+            <select id="brand"><option value="">All Brands</option></select>
+            <input type="number" id="minPrice" placeholder="Min Price">
+            <input type="number" id="maxPrice" placeholder="Max Price">
+            <select id="rating">
+                <option value="">Any Rating</option>
+                <option value="5">5 stars</option>
+                <option value="4">4 stars & Up</option>
+                <option value="3">3 stars & Up</option>
+                <option value="2">2 stars & Up</option>
+                <option value="1">1 star & Up</option>
+            </select>
+            <label class="stock-filter"><input type="checkbox" id="stock"> In Stock Only</label>
+            <select id="sort">
+                <option value="">Newest</option>
+                <option value="price_asc">Price: Low to High</option>
+                <option value="price_desc">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+                <option value="featured">Featured</option>
+            </select>
+        </section>
+
+        <div id="productsMessage" class="catalog-message" role="status">Loading products...</div>
+        <section id="productsContainer" class="product-grid" aria-live="polite"></section>
+    </main>
+
+    <script src="/js/products.js"></script>
+    <script src="/js/site-nav.js"></script>
+</body>
+</html>

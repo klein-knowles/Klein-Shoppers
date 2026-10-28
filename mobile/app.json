@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Klein Shoppers Uganda",
+    "slug": "klein-shoppers-uganda",
+    "description": "Android and iOS shopping app for Klein Shoppers Uganda.",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#edf7f4",
+    "primaryColor": "#063b3f",
+    "scheme": "kleinshoppers",
+    "platforms": ["ios", "android"],
+    "icon": "./assets/icon.png",
+    "ios": {
+      "bundleIdentifier": "com.kleinshoppers.uganda",
+      "buildNumber": "1.0.0",
+      "supportsTablet": false
+    },
+    "android": {
+      "package": "com.kleinshoppers.uganda",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#063b3f"
+      }
+    }
+  }
+}

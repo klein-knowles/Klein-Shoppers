@@ -1,0 +1,28 @@
+.report-card,
+.chart-card,
+.summary-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.report-card,
+.chart-card {
+    padding: 20px;
+}
+
+.summary-card {
+    padding: 16px;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.report-table th,
+.report-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
+}

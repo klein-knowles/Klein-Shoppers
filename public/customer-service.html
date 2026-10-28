@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Service | Klein Shoppers Uganda</title>
+    <link rel="icon" href="icons/icon.png" type="image/png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/css/support.css" />
+  </head>
+  <body>
+    <header class="simple-page-header">
+      <a href="/" class="brand-link">Klein Shoppers</a>
+      <nav>
+        <a href="/orders.html">Orders</a>
+        <a href="/products.html">Shop</a>
+        <a href="/account.html">Account</a>
+      </nav>
+    </header>
+
+    <main class="catalog-page">
+      <section class="catalog-heading">
+        <div>
+          <p class="eyebrow">Help center</p>
+          <h1>Customer Support</h1>
+        </div>
+        <a class="secondary-link" href="/orders.html">Track an order</a>
+      </section>
+
+      <section class="page-section">
+        <h2>Quick Help</h2>
+        <div class="info-grid">
+          <article class="info-card"><h3>Delivery</h3><p>Follow pickup, dispatch, and delivery updates from your orders page.</p></article>
+          <article class="info-card"><h3>Payments</h3><p>Checkout supports order records for cash-on-delivery, cards, and mobile money integrations.</p></article>
+          <article class="info-card"><h3>Returns</h3><p>Return eligibility depends on product type, condition, and seller policy.</p></article>
+        </div>
+      </section>
+
+      <section class="support-container">
+        <header class="support-header">
+          <h2>Support Portal</h2>
+          <div class="user-section" id="userSection">
+            <span id="welcomeMessage"></span>
+            <button onclick="logout()" class="btn-logout" type="button">Logout</button>
+          </div>
+        </header>
+
+        <div id="loginForm" class="auth-box">
+          <h2>Login to Support</h2>
+          <form onsubmit="handleLogin(event)">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit" class="btn-primary">Login</button>
+          </form>
+          <p>Use your Klein Shoppers customer account.</p>
+        </div>
+
+        <div id="dashboard" style="display:none;">
+          <div class="support-nav">
+            <button onclick="showTab('tickets')" class="nav-btn active" type="button">Tickets</button>
+            <button onclick="showTab('newTicket')" class="nav-btn" type="button">New Ticket</button>
+            <button onclick="showTab('chat')" class="nav-btn" type="button">Live Chat</button>
+          </div>
+
+          <div id="ticketsTab" class="tab-content">
+            <h2>My Support Tickets</h2>
+            <select id="statusFilter" onchange="loadTickets()">
+              <option value="">All Status</option>
+              <option value="open">Open</option>
+              <option value="in_progress">In Progress</option>
+              <option value="resolved">Resolved</option>
+              <option value="closed">Closed</option>
+            </select>
+            <div id="ticketsList"></div>
+          </div>
+
+          <div id="newTicketTab" class="tab-content" style="display:none;">
+            <h2>Create New Ticket</h2>
+            <form onsubmit="createTicket(event)">
+              <input type="text" id="subject" placeholder="Subject" required>
+              <select id="priority">
+                <option value="low">Low Priority</option>
+                <option value="medium" selected>Medium Priority</option>
+                <option value="high">High Priority</option>
+                <option value="urgent">Urgent Priority</option>
+              </select>
+              <textarea id="description" placeholder="Describe your issue..." rows="6" required></textarea>
+              <button type="submit" class="btn-primary">Submit Ticket</button>
+            </form>
+          </div>
+
+          <div id="chatTab" class="tab-content" style="display:none;">
+            <h2>Live Chat Support</h2>
+            <div class="chat-box">
+              <div id="chatMessages"></div>
+              <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Type your message..." onkeypress="if(event.key==='Enter') sendMessage()">
+                <button onclick="sendMessage()" class="btn-primary" type="button">Send</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="ticketDetail" class="tab-content" style="display:none;">
+            <button onclick="showTab('tickets')" class="btn-back" type="button">&larr; Back to Tickets</button>
+            <div id="ticketInfo"></div>
+            <div id="ticketReplies"></div>
+            <form onsubmit="addReply(event)" class="reply-form">
+              <textarea id="replyMessage" placeholder="Write your reply..." required></textarea>
+              <button type="submit" class="btn-primary">Send Reply</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/js/support.js"></script>
+      <script src="/js/site-nav.js"></script>
+</body>
+</html>

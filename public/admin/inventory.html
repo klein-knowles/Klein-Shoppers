@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Inventory Management</title>
+
+    <link rel="stylesheet" href="/admin/css/admin.css">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <div id="sidebar"></div>
+
+    <div class="main">
+
+        <div id="topbar"></div>
+
+        <div class="content">
+
+            <h2>Inventory Management</h2>
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Product</th>
+
+                        <th>Category</th>
+
+                        <th>Price</th>
+
+                        <th>Stock</th>
+
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="inventoryTable"></tbody>
+
+            </table>
+
+            <hr>
+
+            <h2>Stock Movement History</h2>
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Product</th>
+
+                        <th>Movement</th>
+
+                        <th>Quantity</th>
+
+                        <th>Previous</th>
+
+                        <th>New</th>
+
+                        <th>Notes</th>
+
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="historyTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="/admin/js/admin.js"></script>
+<script src="/admin/js/inventory.js"></script>
+
+</body>
+
+</html>

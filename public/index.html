@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Klein Shoppers Global | Online Shopping Marketplace</title>
+    <meta name="description" content="Shop deals, groceries, home goods, electronics, fashion, beauty, local BUBU products, and daily essentials from Klein Shoppers Uganda." />
+    <meta name="theme-color" content="#063b3f" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Klein Shoppers Uganda" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="icons/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="icons/icon.png" />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/ai-assistant.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="topbar">
+        <a class="brand" href="index.html" aria-label="Klein Shoppers Uganda home">
+          <img class="brand-logo" src="icons/klein-shoppers-logo.png" alt="Klein Shoppers Uganda" />
+          <span class="brand-copy">
+            <span style="font-size: 23px;" class="brand-mark">Klein Shoppers Global</span>
+			
+        </a>
+
+        <button class="location" type="button">
+          <span class="pin">PIN</span>
+          <span>
+            <small>Deliver to</small>
+            <strong>Kampala, Uganda</strong>
+          </span>
+        </button>
+
+        <form class="search" id="searchForm">
+          <select aria-label="Search category" id="categorySelect">
+            <option value="all">All</option>
+            <option value="deals">Deals</option>
+            <option value="electronics">Electronics</option>
+            <option value="home">Home</option>
+            <option value="fashion">Fashion</option>
+            <option value="beauty">Beauty</option>
+            <option value="grocery">Grocery</option>
+            <option value="appliances">Appliances</option>
+            <option value="office">Office</option>
+            <option value="baby">Baby</option>
+            <option value="sports">Sports</option>
+            <option value="automotive">Automotive</option>
+            <option value="books">Books</option>
+            <option value="toys">Toys</option>
+            <option value="garden">Garden</option>
+            <option value="pets">Pets</option>
+            <option value="bubu">BUBU</option>
+          </select>
+          <input id="searchInput" type="search" placeholder="Search Klein Shoppers Global" />
+          <button type="submit" aria-label="Search">Go</button>
+        </form>
+
+        <nav class="account-nav" aria-label="Account navigation">
+          <a href="account.html"><small>Hello, sign in</small><strong>Account & Lists</strong></a>
+          <a href="orders.html"><small>Returns</small><strong>& Orders</strong></a>
+          <button class="install-button" type="button" id="installButton" hidden>Install App</button>
+          <button class="cart-button" type="button" id="cartButton" aria-label="Open cart">
+            <span class="cart-icon">Cart</span>
+            <span class="cart-count" id="cartCount">0</span>
+            <strong>Cart</strong>
+          </button>
+        </nav>
+      </div>
+
+      <div class="menubar">
+        <a class="menu-button" href="departments.html">Menu All</a>
+        <a href="deals.html">Today's Deals</a>
+        <a href="#fresh">Fresh</a>
+        <a href="#electronics">Electronics</a>
+        <a href="#home">Home & Kitchen</a>
+        <a href="#fashion">Fashion</a>
+        <a href="#beauty">Beauty</a>
+        <a href="#bubu">BUBU Local</a>
+        <a href="videos.html">Videos</a>
+        <a href="sell.html">Sell</a>
+        <a href="customer-service.html">Customer Service</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-label="Featured deals">
+        <div class="hero-copy">
+          <p> Klein Mega Market</p>
+          <h1><center>Shop daily essentials, tech, fashion, and Ugandan-made finds in one place.</center></h1>
+          <div class="hero-actions">
+            <a class="primary-link" href="#deals">See deals</a>
+            <a class="secondary-link" href="departments.html">Browse departments</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="promise-strip" aria-label="Shopping promises">
+        <a href="customer-service.html">
+          <strong>Fast Kampala delivery</strong>
+          <span>Track orders and delivery windows</span>
+        </a>
+        <a href="orders.html">
+          <strong>Easy returns</strong>
+          <span>Simple support for eligible items</span>
+        </a>
+        <a href="#bubu">
+          <strong>BUBU local picks</strong>
+          <span>Support Ugandan sellers and makers</span>
+        </a>
+        <a href="sell.html">
+          <strong>Sell with Klein</strong>
+          <span>Reach shoppers across Uganda</span>
+        </a>
+      </section>
+
+      <section class="quick-grid" aria-label="Popular shopping categories">
+        <article class="feature-tile">
+          <h2>Refresh your space</h2>
+          <div class="tile-grid">
+            <a href="#home"><img alt="Modern chair" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=480&q=80" /><span>Furniture</span></a>
+            <a href="#home"><img alt="Kitchen cookware" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=480&q=80" /><span>Kitchen</span></a>
+            <a href="#home"><img alt="Desk lamp" src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=480&q=80" /><span>Lighting</span></a>
+            <a href="#home"><img alt="Cozy bedding" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=480&q=80" /><span>Bedding</span></a>
+          </div>
+          <a class="tile-link" href="#home">Shop home</a>
+        </article>
+
+        <article class="feature-tile">
+          <h2>Electronics for work and play</h2>
+          <img class="wide-image" alt="Wireless headphones on a desk" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" />
+          <a class="tile-link" href="#electronics">Explore devices</a>
+        </article>
+
+        <article class="feature-tile">
+          <h2>Style picks under UGX 200,000</h2>
+          <div class="tile-grid">
+            <a href="#fashion"><img alt="White sneakers" src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=480&q=80" /><span>Shoes</span></a>
+            <a href="#fashion"><img alt="Folded shirts" src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=480&q=80" /><span>Basics</span></a>
+            <a href="#fashion"><img alt="Leather handbag" src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=480&q=80" /><span>Bags</span></a>
+            <a href="#fashion"><img alt="Sunglasses" src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=480&q=80" /><span>Accessories</span></a>
+          </div>
+          <a class="tile-link" href="#fashion">Shop fashion</a>
+        </article>
+
+        <article class="feature-tile">
+          <h2>Groceries and daily basics</h2>
+          <div class="tile-grid">
+            <a href="#fresh"><img alt="Fresh vegetables" src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=480&q=80" /><span>Fresh food</span></a>
+            <a href="#fresh"><img alt="Coffee beans" src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=480&q=80" /><span>Coffee</span></a>
+            <a href="#fresh"><img alt="Pantry jars" src="https://images.unsplash.com/photo-1584473457406-6240486418e9?auto=format&fit=crop&w=480&q=80" /><span>Pantry</span></a>
+            <a href="#beauty"><img alt="Skincare products" src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=480&q=80" /><span>Care</span></a>
+          </div>
+          <a class="tile-link" href="#fresh">Shop fresh</a>
+        </article>
+      </section>
+
+      <section class="department-band" aria-label="Shop departments">
+        <div class="section-heading">
+          <h2>Shop by department</h2>
+          <a href="departments.html">View all departments</a>
+        </div>
+        <div class="department-grid">
+          <button type="button" data-filter-shortcut="electronics"><span>Devices</span><strong>Electronics</strong></button>
+          <button type="button" data-filter-shortcut="grocery"><span>Fresh and pantry</span><strong>Grocery</strong></button>
+          <button type="button" data-filter-shortcut="appliances"><span>Big and small</span><strong>Appliances</strong></button>
+          <button type="button" data-filter-shortcut="office"><span>Work smarter</span><strong>Office</strong></button>
+          <button type="button" data-filter-shortcut="baby"><span>Care and nursery</span><strong>Baby</strong></button>
+          <button type="button" data-filter-shortcut="sports"><span>Active life</span><strong>Sports</strong></button>
+          <button type="button" data-filter-shortcut="automotive"><span>Car care</span><strong>Automotive</strong></button>
+          <button type="button" data-filter-shortcut="bubu"><span>Made near you</span><strong>Buy Uganda, Build Uganda(BUBU)</strong></button>
+        </div>
+      </section>
+
+      <section class="deal-strip" id="deals" aria-label="Trending deals">
+        <div class="section-heading">
+          <h2>Trending deals</h2>
+          <a href="deals.html">See all deals</a>
+        </div>
+        <div class="product-row" id="dealRow"></div>
+      </section>
+
+      <section class="promo-banner" id="fresh" aria-label="Fresh market">
+        <div>
+          <p>Fresh market</p>
+          <h2>Top up your kitchen with produce, pantry goods, coffee, and home care.</h2>
+        </div>
+        <a class="primary-link" href="#catalogTop" data-filter-link="grocery">Shop grocery</a>
+      </section>
+
+      <section class="deal-strip" aria-label="Fresh and grocery products">
+        <div class="section-heading">
+          <h2>Fresh, pantry and daily essentials</h2>
+          <a href="#catalogTop" data-filter-link="grocery">Shop grocery</a>
+        </div>
+        <div class="product-row" id="freshRow"></div>
+      </section>
+
+      <section class="deal-strip" id="electronics" aria-label="Electronics products">
+        <div class="section-heading">
+          <h2>Electronics and accessories</h2>
+          <a href="#catalogTop" data-filter-link="electronics">Shop electronics</a>
+        </div>
+        <div class="product-row" id="electronicsRow"></div>
+      </section>
+
+      <section class="deal-strip" id="home" aria-label="Home products">
+        <div class="section-heading">
+          <h2>Home, kitchen and appliances</h2>
+          <a href="#catalogTop" data-filter-link="home">Shop home</a>
+        </div>
+        <div class="product-row" id="homeRow"></div>
+      </section>
+
+      <section class="deal-strip" id="fashion" aria-label="Fashion products">
+        <div class="section-heading">
+          <h2>Fashion, shoes and travel</h2>
+          <a href="#catalogTop" data-filter-link="fashion">Shop fashion</a>
+        </div>
+        <div class="product-row" id="fashionRow"></div>
+      </section>
+
+      <section class="deal-strip" id="beauty" aria-label="Beauty products">
+        <div class="section-heading">
+          <h2>Beauty, personal care and wellness</h2>
+          <a href="#catalogTop" data-filter-link="beauty">Shop beauty</a>
+        </div>
+        <div class="product-row" id="beautyRow"></div>
+      </section>
+
+      <section class="local-maker" id="bubu" aria-label="BUBU local products">
+        <div class="local-copy">
+          <p>BUBU marketplace</p>
+          <h2><center>Buy Uganda, Build Uganda with local coffee, baskets, crafts, pantry goods, and home pieces.</center></h2>
+          <a class="secondary-link" href="sell.html">Become a local seller</a>
+        </div>
+        <div class="product-row" id="bubuRow"></div>
+      </section>
+
+      <section class="store-layout" id="catalogTop">
+        <aside class="filters" aria-label="Shopping filters">
+          <h2>Shop by category</h2>
+          <button class="filter is-active" type="button" data-filter="all">All products</button>
+          <button class="filter" type="button" data-filter="deals">Deals</button>
+          <button class="filter" type="button" data-filter="electronics">Electronics</button>
+          <button class="filter" type="button" data-filter="home">Home & Kitchen</button>
+          <button class="filter" type="button" data-filter="fashion">Fashion</button>
+          <button class="filter" type="button" data-filter="beauty">Beauty</button>
+          <button class="filter" type="button" data-filter="grocery">Grocery</button>
+          <button class="filter" type="button" data-filter="appliances">Appliances</button>
+          <button class="filter" type="button" data-filter="office">Office</button>
+          <button class="filter" type="button" data-filter="baby">Baby</button>
+          <button class="filter" type="button" data-filter="sports">Sports</button>
+          <button class="filter" type="button" data-filter="automotive">Automotive</button>
+          <button class="filter" type="button" data-filter="books">Books</button>
+          <button class="filter" type="button" data-filter="toys">Toys</button>
+          <button class="filter" type="button" data-filter="garden">Garden</button>
+          <button class="filter" type="button" data-filter="pets">Pets</button>
+          <button class="filter" type="button" data-filter="bubu">BUBU</button>
+          <div class="filter-note">
+            <strong>Free delivery</strong>
+            <span>on eligible orders over UGX 130,000</span>
+          </div>
+        </aside>
+
+        <section class="catalog" aria-label="Product catalog">
+          <div class="section-heading">
+            <h2>Recommended for you</h2>
+            <span id="resultCount"></span>
+          </div>
+          <div class="product-grid" id="productGrid"></div>
+        </section>
+      </section>
+
+      <section class="link-panels" aria-label="Store services">
+        <a href="deals.html">
+          <strong>Deals hub</strong>
+          <span>Lightning-style offers, bundles, and markdowns</span>
+        </a>
+        <a href="departments.html">
+          <strong>Departments</strong>
+          <span>Find every aisle, from electronics to groceries</span>
+        </a>
+        <a href="orders.html">
+          <strong>Orders and returns</strong>
+          <span>Track purchases, manage returns, and request support</span>
+        </a>
+        <a href="customer-service.html">
+          <strong>Help center</strong>
+          <span>Delivery, payments, warranty, and shopping questions</span>
+        </a>
+        <a href="videos.html">
+          <strong>Video library</strong>
+          <span>Watch product demos, announcements, and shopping guides</span>
+        </a>
+      </section>
+    </main>
+
+    <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart" aria-hidden="true">
+      <div class="cart-panel">
+        <div class="cart-head">
+          <h2>Your cart</h2>
+          <button type="button" id="closeCart" aria-label="Close cart">x</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-total">
+          <span>Subtotal</span>
+          <strong id="cartTotal">UGX 0</strong>
+        </div>
+        <button class="checkout" type="button" id="checkoutButton">Proceed to checkout</button>
+      </div>
+    </aside>
+
+    <aside class="product-modal" id="productModal" aria-label="Product details" aria-hidden="true">
+      <div class="product-modal-panel">
+        <button class="modal-close" type="button" id="closeProductModal" aria-label="Close product details">x</button>
+        <div id="productModalContent"></div>
+      </div>
+    </aside>
+
+    <footer class="site-footer">
+      <a href="#" class="back-to-top">Back to top</a>
+      <div class="footer-grid">
+        <div>
+          <h2>Get to know us</h2>
+          <a href="customer-service.html">About Klein Shoppers</a>
+          <a href="sell.html">Sell on Klein</a>
+          <a href="#bubu">BUBU marketplace</a>
+        </div>
+        <div>
+          <h2>Shop with us</h2>
+          <a href="deals.html">Deals</a>
+          <a href="departments.html">Departments</a>
+          <a href="orders.html">Orders and returns</a>
+        </div>
+        <div>
+          <h2>Let us help</h2>
+          <a href="customer-service.html">Customer service</a>
+          <a href="customer-service.html#delivery">Delivery information</a>
+          <a href="customer-service.html#payments">Payments and safety</a>
+        </div>
+        <div>
+          <h2>Popular searches</h2>
+          <a href="#electronics">Phones and electronics</a>
+          <a href="#fresh">Groceries</a>
+          <a href="#home">Kitchen and home</a>
+        </div>
+      </div>
+      <p>Klein Shoppers Uganda. Original marketplace design for local online shopping.</p>
+      <p>Developed by Lukas Kitatta Uganda</p>
+    </footer>
+
+    <nav class="app-tabs" aria-label="App navigation">
+      <a href="index.html" class="app-tab is-active">
+        <span>Home</span>
+      </a>
+      <a href="deals.html" class="app-tab">
+        <span>Deals</span>
+      </a>
+      <a href="departments.html" class="app-tab">
+        <span>Categories</span>
+      </a>
+      <a href="videos.html" class="app-tab">
+        <span>Videos</span>
+      </a>
+      <button class="app-tab" type="button" data-cart-shortcut>
+        <span>Cart</span>
+        <strong id="mobileCartCount">0</strong>
+      </button>
+    </nav>
+
+    <section class="ai-assistant" id="ask-klein-ai" aria-label="Klein Assistant shopping assistant">
+      <button class="ai-assistant-toggle" id="aiAssistantToggle" type="button" aria-expanded="false" aria-controls="aiAssistantPanel">
+        <span aria-hidden="true">✦</span> Ask Klein Assistant
+      </button>
+      <div class="ai-assistant-panel" id="aiAssistantPanel" hidden>
+        <header class="ai-assistant-header">
+          <div><strong>Klein Assistant</strong><small>Your shopping assistant</small></div>
+          <button id="aiAssistantClose" type="button" aria-label="Close assistant">×</button>
+        </header>
+        <div class="ai-assistant-messages" id="aiAssistantMessages" aria-live="polite">
+          <p class="ai-message assistant">Hi! I can help you find products, compare options, or answer shopping questions. What are you looking for?</p>
+        </div>
+        <form id="aiAssistantForm" class="ai-assistant-form">
+          <label class="sr-only" for="aiAssistantInput">Ask Klein Assistant</label>
+          <input id="aiAssistantInput" type="text" maxlength="1000" placeholder="Ask about products or shopping…" autocomplete="off" required />
+          <button type="submit" aria-label="Send message">Send</button>
+        </form>
+        <p class="ai-assistant-note">AI responses can be inaccurate. Confirm product details before ordering.</p>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="js/ai-assistant.js"></script>
+    <script src="js/site-nav.js"></script>
+  </body>
+</html>

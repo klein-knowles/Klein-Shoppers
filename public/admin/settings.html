@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Website Settings | Klein Shoppers</title>
+
+    <!-- Bootstrap -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <!-- Admin CSS -->
+
+    <link
+        rel="stylesheet"
+        href="/admin/css/admin.css">
+
+    <link
+        rel="stylesheet"
+        href="/admin/css/settings.css">
+
+</head>
+
+<body>
+
+<div class="d-flex">
+
+    <!-- Sidebar -->
+
+    <div id="sidebar"></div>
+
+    <!-- Main -->
+
+    <div class="flex-grow-1">
+
+        <!-- Topbar -->
+
+        <div id="topbar"></div>
+
+        <div class="container-fluid py-4">
+
+            <!-- ===================================== -->
+            <!-- HEADER -->
+            <!-- ===================================== -->
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <div>
+
+                    <h2 class="fw-bold">
+
+                        <i class="bi bi-gear-fill text-primary"></i>
+
+                        Website Settings
+
+                    </h2>
+
+                    <p class="text-muted mb-0">
+
+                        Configure your Klein Shoppers website
+
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <button
+                        class="btn btn-outline-danger"
+
+                        data-bs-toggle="modal"
+
+                        data-bs-target="#resetModal">
+
+                        <i class="bi bi-arrow-counterclockwise"></i>
+
+                        Restore Defaults
+
+                    </button>
+
+                    <button
+                        class="btn btn-primary"
+
+                        onclick="saveSettings()">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        Save Changes
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- ===================================== -->
+            <!-- QUICK STATS -->
+            <!-- ===================================== -->
+
+            <div class="row g-4 mb-4">
+
+                <div class="col-lg-3">
+
+                    <div class="setting-card bg-primary">
+
+                        <small>Current Theme</small>
+
+                        <h3 id="themeLabel">
+
+                            Light
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3">
+
+                    <div class="setting-card bg-success">
+
+                        <small>Currency</small>
+
+                        <h3 id="currencyLabel">
+
+                            UGX
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3">
+
+                    <div class="setting-card bg-warning">
+
+                        <small>Tax Rate</small>
+
+                        <h3 id="taxLabel">
+
+                            18%
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3">
+
+                    <div class="setting-card bg-danger">
+
+                        <small>Maintenance</small>
+
+                        <h3 id="maintenanceLabel">
+
+                            OFF
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ===================================== -->
+            <!-- SETTINGS LAYOUT -->
+            <!-- ===================================== -->
+
+            <div class="row">
+
+                <!-- LEFT MENU -->
+
+                <div class="col-lg-3">
+
+                    <div class="card shadow-sm">
+
+                        <div class="list-group list-group-flush">
+
+                            <button
+
+                                class="list-group-item list-group-item-action active"
+
+                                data-bs-toggle="pill"
+
+                                data-bs-target="#store">
+
+                                <i class="bi bi-shop"></i>
+
+                                Store Information
+
+                            </button>
+
+                            <button
+
+                                class="list-group-item list-group-item-action"
+
+                                data-bs-toggle="pill"
+
+                                data-bs-target="#logo">
+
+                                <i class="bi bi-image-fill"></i>
+
+                                Logo
+
+                            </button>
+
+                            <button
+
+                                class="list-group-item list-group-item-action"
+
+                                data-bs-toggle="pill"
+
+                                data-bs-target="#theme">
+
+                                <i class="bi bi-palette-fill"></i>
+
+                                Theme
+
+                            </button>
+
+                            <button
+
+                                class="list-group-item list-group-item-action"
+
+                                data-bs-toggle="pill"
+
+                                data-bs-target="#currency">
+
+                                <i class="bi bi-currency-exchange"></i>
+
+                                Currency
+
+                            </button>
+
+                            <button
+
+                                class="list-group-item list-group-item-action"
+
+                                data-bs-toggle="pill"
+
+                                data-bs-target="#tax">
+
+                                <i class="bi bi-receipt"></i>
+
+                                Taxes
+
+                            </button>
+
+                            <button
+
+                                class="list-group-item list-group-item-action"
+
+                                data-bs-toggle="pill"
+
+                                data-bs-target="#shipping">
+
+                                <i class="bi bi-truck"></i>
+
+                                Shipping
+
+                            </button>
+
+                            <button
+
+                                class="list-group-item list-group-item-action"
+
+                                data-bs-toggle="pill"
+
+                                data-bs-target="#email">
+
+                                <i class="bi bi-envelope-fill"></i>
+
+                                Email
+
+                            </button>
+
+                            <button
+
+                                class="list-group-item list-group-item-action"
+
+                                data-bs-toggle="pill"
+
+                                data-bs-target="#social">
+
+                                <i class="bi bi-share-fill"></i>
+
+                                Social Media
+
+                            </button>
+
+                            <button
+
+                                class="list-group-item list-group-item-action"
+
+                                data-bs-toggle="pill"
+
+                                data-bs-target="#seo">
+
+                                <i class="bi bi-search"></i>
+
+                                SEO
+
+                            </button>
+
+                            <button
+
+                                class="list-group-item list-group-item-action"
+
+                                data-bs-toggle="pill"
+
+                                data-bs-target="#maintenance">
+
+                                <i class="bi bi-tools"></i>
+
+                                Maintenance
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- RIGHT CONTENT -->
+
+                <div class="col-lg-9">
+
+                    <div class="tab-content">
+
+                        <!-- ================================= -->
+                        <!-- STORE INFORMATION -->
+                        <!-- ================================= -->
+
+                        <div
+                            class="tab-pane fade show active"
+                            id="store">
+
+                            <div class="card shadow-sm">
+
+                                <div class="card-header">
+
+                                    <h5 class="mb-0">
+
+                                        Store Information
+
+                                    </h5>
+
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="row g-3">
+
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+
+                                                Website Name
+
+                                            </label>
+
+                                            <input
+
+                                                id="website_name"
+
+                                                class="form-control">
+
+                                        </div>
+
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+
+                                                Tagline
+
+                                            </label>
+
+                                            <input
+
+                                                id="tagline"
+
+                                                class="form-control">
+
+                                        </div>
+
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+
+                                                Contact Email
+
+                                            </label>
+
+                                            <input
+
+                                                id="email"
+
+                                                class="form-control">
+
+                                        </div>
+
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+
+                                                Phone
+
+                                            </label>
+
+                                            <input
+
+                                                id="phone"
+
+                                                class="form-control">
+
+                                        </div>
+
+                                        <div class="col-12">
+
+                                            <label class="form-label">
+
+                                                Address
+
+                                            </label>
+
+                                            <textarea
+
+                                                id="address"
+
+                                                rows="4"
+
+                                                class="form-control">
+
+                                            </textarea>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ================================= -->
+<!-- LOGO SETTINGS -->
+<!-- ================================= -->
+
+<div
+    class="tab-pane fade"
+    id="logo">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            <h5 class="mb-0">
+
+                Website Logo
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-4 text-center">
+
+                    <img
+
+                        id="logoPreview"
+
+                        src="/uploads/logo/logo.png"
+
+                        class="img-fluid rounded shadow"
+
+                        style="max-height:180px;">
+
+                </div>
+
+                <div class="col-lg-8">
+
+                    <label class="form-label">
+
+                        Upload New Logo
+
+                    </label>
+
+                    <input
+
+                        type="file"
+
+                        id="logoFile"
+
+                        class="form-control"
+
+                        accept=".png,.jpg,.jpeg,.gif,.webp,.svg">
+
+                    <small class="text-muted">
+
+                        Recommended size: 300 × 300 pixels
+
+                    </small>
+
+                    <div class="mt-4">
+
+                        <button
+
+                            class="btn btn-primary"
+
+                            onclick="uploadLogo()">
+
+                            <i class="bi bi-upload"></i>
+
+                            Upload Logo
+
+                        </button>
+
+                        <button
+
+                            class="btn btn-outline-danger"
+
+                            onclick="deleteLogo()">
+
+                            <i class="bi bi-trash-fill"></i>
+
+                            Remove Logo
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- THEME -->
+<!-- ================================= -->
+
+<div
+    class="tab-pane fade"
+    id="theme">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            <h5 class="mb-0">
+
+                Theme Settings
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Website Theme
+
+                    </label>
+
+                    <select
+
+                        id="theme"
+
+                        class="form-select">
+
+                        <option value="light">
+
+                            Light
+
+                        </option>
+
+                        <option value="dark">
+
+                            Dark
+
+                        </option>
+
+                        <option value="auto">
+
+                            Auto
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Primary Color
+
+                    </label>
+
+                    <input
+
+                        type="color"
+
+                        id="primary_color"
+
+                        class="form-control form-control-color">
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="form-check form-switch">
+
+                <input
+
+                    class="form-check-input"
+
+                    type="checkbox"
+
+                    id="animations">
+
+                <label class="form-check-label">
+
+                    Enable animations
+
+                </label>
+
+            </div>
+
+            <div class="form-check form-switch">
+
+                <input
+
+                    class="form-check-input"
+
+                    type="checkbox"
+
+                    id="roundedCorners">
+
+                <label class="form-check-label">
+
+                    Rounded interface
+
+                </label>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- CURRENCY -->
+<!-- ================================= -->
+
+<div
+    class="tab-pane fade"
+    id="currency">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            <h5 class="mb-0">
+
+                Currency Settings
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Currency
+
+                    </label>
+
+                    <select
+
+                        id="currency"
+
+                        class="form-select">
+
+                        <option value="UGX">
+
+                            UGX
+
+                        </option>
+
+                        <option value="USD">
+
+                            USD
+
+                        </option>
+
+                        <option value="KES">
+
+                            KES
+
+                        </option>
+
+                        <option value="TZS">
+
+                            TZS
+
+                        </option>
+
+                        <option value="EUR">
+
+                            EUR
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Currency Symbol
+
+                    </label>
+
+                    <input
+
+                        id="currency_symbol"
+
+                        class="form-control">
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Decimal Places
+
+                    </label>
+
+                    <input
+
+                        id="decimal_places"
+
+                        type="number"
+
+                        class="form-control"
+
+                        value="2">
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Thousands Separator
+
+                    </label>
+
+                    <select
+
+                        id="thousand_separator"
+
+                        class="form-select">
+
+                        <option value=",">
+
+                            Comma (,)
+
+                        </option>
+
+                        <option value=".">
+
+                            Dot (.)
+
+                        </option>
+
+                        <option value=" ">
+
+                            Space
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- TAX SETTINGS -->
+<!-- ================================= -->
+
+<div
+    class="tab-pane fade"
+    id="tax">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            <h5 class="mb-0">
+
+                Tax Configuration
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row g-3">
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+
+                        VAT %
+
+                    </label>
+
+                    <input
+
+                        id="tax_rate"
+
+                        type="number"
+
+                        class="form-control">
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+
+                        Tax Name
+
+                    </label>
+
+                    <input
+
+                        id="tax_name"
+
+                        class="form-control"
+
+                        value="VAT">
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+
+                        Tax Included
+
+                    </label>
+
+                    <select
+
+                        id="tax_included"
+
+                        class="form-select">
+
+                        <option value="1">
+
+                            Yes
+
+                        </option>
+
+                        <option value="0">
+
+                            No
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- SHIPPING SETTINGS -->
+<!-- ================================= -->
+
+<div
+    class="tab-pane fade"
+    id="shipping">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            <h5 class="mb-0">
+
+                Shipping Settings
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row g-3">
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+
+                        Flat Shipping Fee
+
+                    </label>
+
+                    <input
+
+                        id="shipping_fee"
+
+                        type="number"
+
+                        class="form-control"
+
+                        placeholder="10000">
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+
+                        Free Shipping Above
+
+                    </label>
+
+                    <input
+
+                        id="free_shipping"
+
+                        type="number"
+
+                        class="form-control"
+
+                        placeholder="200000">
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+
+                        Delivery Days
+
+                    </label>
+
+                    <input
+
+                        id="delivery_days"
+
+                        class="form-control"
+
+                        placeholder="2 - 5 Business Days">
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Shipping Method
+
+                    </label>
+
+                    <select
+
+                        id="shipping_method"
+
+                        class="form-select">
+
+                        <option value="flat">
+
+                            Flat Rate
+
+                        </option>
+
+                        <option value="weight">
+
+                            Weight Based
+
+                        </option>
+
+                        <option value="distance">
+
+                            Distance Based
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Default Delivery Country
+
+                    </label>
+
+                    <input
+
+                        id="shipping_country"
+
+                        class="form-control"
+
+                        value="Uganda">
+
+                </div>
+
+                <div class="col-12">
+
+                    <div class="form-check form-switch">
+
+                        <input
+
+                            id="enable_shipping"
+
+                            class="form-check-input"
+
+                            type="checkbox"
+
+                            checked>
+
+                        <label class="form-check-label">
+
+                            Enable Shipping
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- SOCIAL MEDIA -->
+<!-- ================================= -->
+
+<div
+    class="tab-pane fade"
+    id="social">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            <h5 class="mb-0">
+
+                Social Media
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Facebook
+
+                    </label>
+
+                    <input
+
+                        id="facebook"
+
+                        class="form-control"
+
+                        placeholder="https://facebook.com/kleinshoppers">
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Instagram
+
+                    </label>
+
+                    <input
+
+                        id="instagram"
+
+                        class="form-control"
+
+                        placeholder="https://instagram.com/kleinshoppers">
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        X (Twitter)
+
+                    </label>
+
+                    <input
+
+                        id="twitter"
+
+                        class="form-control"
+
+                        placeholder="https://x.com/kleinshoppers">
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        YouTube
+
+                    </label>
+
+                    <input
+
+                        id="youtube"
+
+                        class="form-control"
+
+                        placeholder="https://youtube.com/@kleinshoppers">
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        TikTok
+
+                    </label>
+
+                    <input
+
+                        id="tiktok"
+
+                        class="form-control"
+
+                        placeholder="https://tiktok.com/@kleinshoppers">
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        LinkedIn
+
+                    </label>
+
+                    <input
+
+                        id="linkedin"
+
+                        class="form-control"
+
+                        placeholder="https://linkedin.com/company/kleinshoppers">
+
+                </div>
+
+                <div class="col-12">
+
+                    <label class="form-label">
+
+                        WhatsApp Number
+
+                    </label>
+
+                    <input
+
+                        id="whatsapp"
+
+                        class="form-control"
+
+                        placeholder="+256700000000">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- SEO SETTINGS -->
+<!-- ================================= -->
+
+<div
+    class="tab-pane fade"
+    id="seo">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            <h5 class="mb-0">
+
+                SEO Settings
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row g-3">
+
+                <div class="col-12">
+
+                    <label class="form-label">
+
+                        Meta Title
+
+                    </label>
+
+                    <input
+
+                        id="meta_title"
+
+                        class="form-control"
+
+                        placeholder="Klein Shoppers - Online Shopping Uganda">
+
+                </div>
+
+                <div class="col-12">
+
+                    <label class="form-label">
+
+                        Meta Description
+
+                    </label>
+
+                    <textarea
+
+                        id="meta_description"
+
+                        rows="4"
+
+                        class="form-control"
+
+                        placeholder="Describe your online store..."></textarea>
+
+                </div>
+
+                <div class="col-12">
+
+                    <label class="form-label">
+
+                        Meta Keywords
+
+                    </label>
+
+                    <textarea
+
+                        id="meta_keywords"
+
+                        rows="3"
+
+                        class="form-control"
+
+                        placeholder="shopping, uganda, electronics, fashion, groceries"></textarea>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Google Analytics ID
+
+                    </label>
+
+                    <input
+
+                        id="google_analytics"
+
+                        class="form-control"
+
+                        placeholder="G-XXXXXXXXXX">
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Google Search Console
+
+                    </label>
+
+                    <input
+
+                        id="google_console"
+
+                        class="form-control"
+
+                        placeholder="Verification Code">
+
+                </div>
+
+                <div class="col-12">
+
+                    <div class="form-check form-switch">
+
+                        <input
+
+                            id="enable_seo"
+
+                            class="form-check-input"
+
+                            type="checkbox"
+
+                            checked>
+
+                        <label class="form-check-label">
+
+                            Enable SEO Optimization
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- EMAIL SETTINGS -->
+<!-- ================================= -->
+
+<div
+    class="tab-pane fade"
+    id="email">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            <h5 class="mb-0">
+
+                Email Configuration
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        SMTP Host
+
+                    </label>
+
+                    <input
+
+                        id="smtp_host"
+
+                        class="form-control"
+
+                        placeholder="smtp.gmail.com">
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        SMTP Port
+
+                    </label>
+
+                    <input
+
+                        id="smtp_port"
+
+                        type="number"
+
+                        class="form-control"
+
+                        value="587">
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Email Address
+
+                    </label>
+
+                    <input
+
+                        id="smtp_email"
+
+                        class="form-control"
+
+                        placeholder="admin@kleinshoppers.com">
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Password / App Password
+
+                    </label>
+
+                    <input
+
+                        id="smtp_password"
+
+                        type="password"
+
+                        class="form-control">
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Encryption
+
+                    </label>
+
+                    <select
+
+                        id="smtp_secure"
+
+                        class="form-select">
+
+                        <option value="tls">
+
+                            TLS
+
+                        </option>
+
+                        <option value="ssl">
+
+                            SSL
+
+                        </option>
+
+                        <option value="none">
+
+                            None
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-6 d-flex align-items-end">
+
+                    <button
+
+                        class="btn btn-success w-100"
+
+                        onclick="testSMTP()">
+
+                        <i class="bi bi-envelope-check-fill"></i>
+
+                        Test SMTP
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- MAINTENANCE -->
+<!-- ================================= -->
+
+<div
+    class="tab-pane fade"
+    id="maintenance">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            <h5 class="mb-0">
+
+                Maintenance Mode
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="alert alert-warning">
+
+                <i class="bi bi-exclamation-triangle-fill"></i>
+
+                When Maintenance Mode is enabled,
+                customers cannot access the website.
+
+            </div>
+
+            <div class="form-check form-switch mb-4">
+
+                <input
+
+                    id="maintenance"
+
+                    class="form-check-input"
+
+                    type="checkbox">
+
+                <label class="form-check-label">
+
+                    Enable Maintenance Mode
+
+                </label>
+
+            </div>
+
+            <label class="form-label">
+
+                Maintenance Message
+
+            </label>
+
+            <textarea
+
+                id="maintenance_message"
+
+                rows="5"
+
+                class="form-control"
+
+                placeholder="We are currently performing scheduled maintenance..."></textarea>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- END TAB CONTENT -->
+<!-- ================================= -->
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+<!-- RESET SETTINGS MODAL -->
+<!-- ================================= -->
+
+<div
+
+    class="modal fade"
+
+    id="resetModal"
+
+    tabindex="-1">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header bg-danger text-white">
+
+                <h5 class="modal-title">
+
+                    Restore Default Settings
+
+                </h5>
+
+                <button
+
+                    class="btn-close btn-close-white"
+
+                    data-bs-dismiss="modal">
+
+                </button>
+
+            </div>
+
+            <div class="modal-body text-center">
+
+                <i
+
+                    class="bi bi-arrow-counterclockwise text-danger"
+
+                    style="font-size:70px;">
+
+                </i>
+
+                <h4 class="mt-3">
+
+                    Restore Factory Defaults?
+
+                </h4>
+
+                <p>
+
+                    All customized website settings
+                    will be permanently removed.
+
+                </p>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+
+                    class="btn btn-secondary"
+
+                    data-bs-dismiss="modal">
+
+                    Cancel
+
+                </button>
+
+                <button
+
+                    class="btn btn-danger"
+
+                    onclick="resetSettings()">
+
+                    Restore Defaults
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- LOADING MODAL -->
+<!-- ================================= -->
+
+<div
+
+    class="modal fade"
+
+    id="loadingModal"
+
+    tabindex="-1"
+
+    data-bs-backdrop="static"
+
+    data-bs-keyboard="false">
+
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-body text-center py-5">
+
+                <div
+
+                    class="spinner-border text-primary">
+
+                </div>
+
+                <h6 class="mt-4">
+
+                    Saving Settings...
+
+                </h6>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- TOAST -->
+<!-- ================================= -->
+
+<div
+
+    class="position-fixed bottom-0 end-0 p-4"
+
+    style="z-index:9999;">
+
+    <div
+
+        id="toast"
+
+        class="toast align-items-center text-bg-success border-0">
+
+        <div class="d-flex">
+
+            <div
+
+                id="toastMessage"
+
+                class="toast-body">
+
+                Saved Successfully
+
+            </div>
+
+            <button
+
+                class="btn-close btn-close-white me-2 m-auto"
+
+                data-bs-dismiss="toast">
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="/admin/js/layout.js"></script>
+
+<script src="/js/settings.js"></script>
+
+<script>
+
+initLayout("Website Settings");
+
+</script>
+
+</body>
+
+</html>

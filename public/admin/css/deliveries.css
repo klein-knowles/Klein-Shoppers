@@ -1,0 +1,879 @@
+/* ==========================================================
+   Klein Shoppers
+   Delivery Management Styles
+========================================================== */
+
+:root{
+
+    --primary:#2563eb;
+    --success:#16a34a;
+    --warning:#f59e0b;
+    --danger:#dc2626;
+    --secondary:#6b7280;
+    --info:#0ea5e9;
+
+    --card-radius:16px;
+
+    --transition:.30s ease;
+
+}
+
+/* ==========================================================
+   Page
+========================================================== */
+
+body{
+
+    background:#f4f6fb;
+
+    font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+
+}
+
+.container-fluid{
+
+    padding:30px;
+
+}
+
+/* ==========================================================
+   Statistics Cards
+========================================================== */
+
+.delivery-card{
+
+    color:#fff;
+
+    border-radius:var(--card-radius);
+
+    padding:25px;
+
+    min-height:120px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:var(--transition);
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.delivery-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.delivery-card h3{
+
+    font-size:32px;
+
+    margin-top:12px;
+
+    font-weight:700;
+
+}
+
+.delivery-card small{
+
+    font-size:15px;
+
+    opacity:.9;
+
+    letter-spacing:.4px;
+
+}
+
+.delivery-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.15);
+
+    right:-30px;
+
+    top:-30px;
+
+}
+
+/* ==========================================================
+   Bootstrap Color Overrides
+========================================================== */
+
+.bg-primary{
+
+    background:#2563eb!important;
+
+}
+
+.bg-success{
+
+    background:#16a34a!important;
+
+}
+
+.bg-warning{
+
+    background:#f59e0b!important;
+
+}
+
+.bg-danger{
+
+    background:#dc2626!important;
+
+}
+
+.bg-secondary{
+
+    background:#64748b!important;
+
+}
+
+.bg-info{
+
+    background:#0891b2!important;
+
+}
+
+/* ==========================================================
+   Cards
+========================================================== */
+
+.card{
+
+    border:none;
+
+    border-radius:16px;
+
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+
+}
+
+.card-header{
+
+    background:#fff;
+
+    border-bottom:1px solid #edf2f7;
+
+    padding:18px 25px;
+
+}
+
+.card-header h5{
+
+    margin:0;
+
+    font-weight:600;
+
+}
+
+/* ==========================================================
+   Search Area
+========================================================== */
+
+.form-control,
+
+.form-select{
+
+    height:48px;
+
+    border-radius:12px;
+
+    border:1px solid #dbe3ea;
+
+    transition:.3s;
+
+}
+
+.form-control:focus,
+
+.form-select:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 .2rem rgba(37,99,235,.15);
+
+}
+
+.btn{
+
+    border-radius:12px;
+
+    transition:.25s;
+
+}
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================================
+   Table
+========================================================== */
+
+.table{
+
+    margin-bottom:0;
+
+}
+
+.table thead{
+
+    background:#f8fafc;
+
+}
+
+.table thead th{
+
+    border:none;
+
+    color:#475569;
+
+    font-size:14px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+    padding:18px;
+
+}
+
+.table tbody td{
+
+    padding:18px;
+
+    vertical-align:middle;
+
+}
+
+.table-hover tbody tr{
+
+    transition:.25s;
+
+}
+
+.table-hover tbody tr:hover{
+
+    background:#f9fbff;
+
+}
+
+.table td{
+
+    border-top:1px solid #eef2f7;
+
+}
+
+/* ==========================================================
+   Tracking Number
+========================================================== */
+
+.table td:nth-child(2){
+
+    font-family:monospace;
+
+    font-weight:700;
+
+    color:#2563eb;
+
+}
+
+/* ==========================================================
+   Action Buttons
+========================================================== */
+
+.table .btn{
+
+    width:38px;
+
+    height:38px;
+
+    padding:0;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-right:6px;
+
+}
+
+.table .btn i{
+
+    font-size:15px;
+
+}
+
+/* ==========================================================
+   Status Badges
+========================================================== */
+
+.badge{
+
+    border-radius:50px;
+
+    padding:8px 14px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    letter-spacing:.4px;
+
+}
+
+.badge.bg-warning{
+
+    color:#fff;
+
+}
+
+.badge.bg-info{
+
+    color:#fff;
+
+}
+
+.badge.bg-success{
+
+    color:#fff;
+
+}
+
+.badge.bg-danger{
+
+    color:#fff;
+
+}
+
+.badge.bg-secondary{
+
+    color:#fff;
+
+}
+
+/* ==========================================================
+   Empty Table
+========================================================== */
+
+.table tbody tr td[colspan]{
+
+    padding:60px;
+
+    color:#94a3b8;
+
+    font-size:16px;
+
+}
+
+/* ==========================================================
+   Spinner
+========================================================== */
+
+.spinner-border{
+
+    width:2.5rem;
+
+    height:2.5rem;
+
+}
+
+/* ==========================================================
+   Page Heading
+========================================================== */
+
+h2{
+
+    font-weight:700;
+
+    color:#1e293b;
+
+}
+
+.text-muted{
+
+    color:#64748b!important;
+
+}
+
+/* ==========================================================
+   Klein Shoppers
+   Delivery Management Styles - Part 2
+========================================================== */
+
+/* ==========================================================
+   Modal
+========================================================== */
+
+.modal-content{
+
+    border:none;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.18);
+
+}
+
+.modal-header{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    border:none;
+
+    padding:18px 24px;
+
+}
+
+.modal-header .btn-close{
+
+    filter:invert(1);
+
+}
+
+.modal-title{
+
+    font-weight:600;
+
+}
+
+.modal-body{
+
+    padding:25px;
+
+}
+
+.modal-footer{
+
+    border:none;
+
+    padding:20px 25px;
+
+}
+
+/* ==========================================================
+   Forms
+========================================================== */
+
+label{
+
+    font-weight:600;
+
+    color:#374151;
+
+    margin-bottom:6px;
+
+}
+
+textarea.form-control{
+
+    min-height:120px;
+
+    resize:vertical;
+
+}
+
+.form-control,
+
+.form-select{
+
+    background:#fff;
+
+}
+
+.form-control::placeholder{
+
+    color:#94a3b8;
+
+}
+
+/* ==========================================================
+   Input Groups
+========================================================== */
+
+.input-group-text{
+
+    background:#f8fafc;
+
+    border:1px solid #dbe3ea;
+
+}
+
+/* ==========================================================
+   Button Effects
+========================================================== */
+
+.btn-primary{
+
+    background:#2563eb;
+
+    border-color:#2563eb;
+
+}
+
+.btn-primary:hover{
+
+    background:#1d4ed8;
+
+    border-color:#1d4ed8;
+
+}
+
+.btn-warning{
+
+    color:#fff;
+
+}
+
+.btn-danger:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.btn-success:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================================
+   Cards Animation
+========================================================== */
+
+.delivery-card{
+
+    animation:fadeUp .5s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================================
+   Table Animation
+========================================================== */
+
+tbody tr{
+
+    animation:fadeTable .3s ease;
+
+}
+
+@keyframes fadeTable{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(8px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================================
+   Toast Notification
+========================================================== */
+
+.toast{
+
+    border-radius:12px;
+
+    box-shadow:0 12px 25px rgba(0,0,0,.18);
+
+}
+
+/* ==========================================================
+   Scrollbar
+========================================================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+    height:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#cbd5e1;
+
+    border-radius:50px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#94a3b8;
+
+}
+
+/* ==========================================================
+   Responsive
+========================================================== */
+
+@media(max-width:1200px){
+
+    .delivery-card{
+
+        margin-bottom:15px;
+
+    }
+
+}
+
+@media(max-width:992px){
+
+    .container-fluid{
+
+        padding:20px;
+
+    }
+
+    .table{
+
+        font-size:14px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    h2{
+
+        font-size:24px;
+
+    }
+
+    .delivery-card{
+
+        min-height:100px;
+
+        padding:18px;
+
+    }
+
+    .delivery-card h3{
+
+        font-size:24px;
+
+    }
+
+    .table thead{
+
+        display:none;
+
+    }
+
+    .table,
+
+    .table tbody,
+
+    .table tr,
+
+    .table td{
+
+        display:block;
+
+        width:100%;
+
+    }
+
+    .table tr{
+
+        margin-bottom:15px;
+
+        border:1px solid #e5e7eb;
+
+        border-radius:12px;
+
+        overflow:hidden;
+
+        background:#fff;
+
+    }
+
+    .table td{
+
+        text-align:right;
+
+        padding-left:45%;
+
+        position:relative;
+
+    }
+
+    .table td::before{
+
+        position:absolute;
+
+        left:15px;
+
+        top:18px;
+
+        font-weight:600;
+
+        color:#475569;
+
+        text-align:left;
+
+    }
+
+    .table td:nth-child(1)::before{content:"ID";}
+    .table td:nth-child(2)::before{content:"Tracking";}
+    .table td:nth-child(3)::before{content:"Order";}
+    .table td:nth-child(4)::before{content:"Customer";}
+    .table td:nth-child(5)::before{content:"Courier";}
+    .table td:nth-child(6)::before{content:"Phone";}
+    .table td:nth-child(7)::before{content:"Fee";}
+    .table td:nth-child(8)::before{content:"Status";}
+    .table td:nth-child(9)::before{content:"Estimated";}
+    .table td:nth-child(10)::before{content:"Actions";}
+
+}
+
+@media(max-width:576px){
+
+    .modal-body{
+
+        padding:18px;
+
+    }
+
+    .btn{
+
+        width:100%;
+
+        margin-bottom:8px;
+
+    }
+
+}
+
+/* ==========================================================
+   Print
+========================================================== */
+
+@media print{
+
+    body{
+
+        background:#fff;
+
+    }
+
+    #sidebar,
+
+    #topbar,
+
+    .btn,
+
+    .modal,
+
+    .toast{
+
+        display:none!important;
+
+    }
+
+    .card{
+
+        box-shadow:none;
+
+        border:1px solid #ddd;
+
+    }
+
+}
+
+/* ==========================================================
+   Utilities
+========================================================== */
+
+.shadow-soft{
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.rounded-xl{
+
+    border-radius:18px;
+
+}
+
+.text-small{
+
+    font-size:13px;
+
+}
+
+.fw-600{
+
+    font-weight:600;
+
+}
+
+.cursor-pointer{
+
+    cursor:pointer;
+
+}
+
+.transition{
+
+    transition:.3s ease;
+
+}
+
+/* ==========================================================
+   End
+========================================================== */

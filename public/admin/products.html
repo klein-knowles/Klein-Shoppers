@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Products</title>
+    <link rel="stylesheet" href="/admin/css/admin.css">
+    <link rel="stylesheet" href="/admin/css/products.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div id="sidebar"></div>
+        <div class="main">
+            <div id="topbar"></div>
+            <div class="content">
+                <div class="page-header">
+                    <h2>Manage Products</h2>
+                    <a href="/admin/add-product.html" class="btn-primary">+ Add New Product</a>
+                </div>
+
+                <div class="table-container">
+                    <table id="productsTable" class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Brand</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="8" class="empty-message">Loading products...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/admin/js/admin.js"></script>
+    <script src="/admin/js/product.js"></script>
+</body>
+</html>

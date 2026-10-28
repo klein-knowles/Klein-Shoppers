@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Add Category</title>
+
+<link rel="stylesheet" href="/admin/css/admin.css">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <div id="sidebar"></div>
+
+    <div class="main">
+
+        <div id="topbar"></div>
+
+        <div class="content">
+
+            <h2>Add New Category</h2>
+
+            <form id="categoryForm" enctype="multipart/form-data">
+
+                <div class="form-group">
+
+                    <label>Category Name</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Description</label>
+
+                    <textarea
+                        id="description"
+                        rows="5"></textarea>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Category Image</label>
+
+                    <input
+                        type="file"
+                        id="image"
+                        accept=".jpg,.jpeg,.png,.gif,.webp">
+
+                </div>
+
+                <div class="form-group">
+
+                    <img
+                        id="previewImage"
+                        src="/images/no-image.png"
+                        style="
+                            width:220px;
+                            height:220px;
+                            object-fit:cover;
+                            border:1px solid #ddd;
+                            border-radius:10px;
+                        ">
+
+                </div>
+
+                <button
+                    type="submit">
+
+                    Save Category
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="/admin/js/admin.js"></script>
+<script src="/admin/js/add-category.js"></script>
+
+</body>
+
+</html>

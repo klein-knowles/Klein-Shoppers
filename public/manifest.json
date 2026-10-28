@@ -1,0 +1,34 @@
+{
+  "name": "Klein Shoppers Uganda",
+  "short_name": "Klein",
+  "description": "A mobile shopping app for Klein Shoppers Uganda.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#edf7f4",
+  "theme_color": "#063b3f",
+  "categories": ["shopping", "lifestyle"],
+  "icons": [
+    {
+      "src": "icons/icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Today's Deals",
+      "short_name": "Deals",
+      "url": "./index.html#deals",
+      "icons": [
+        {
+          "src": "icons/icon.png",
+          "sizes": "1024x1024",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Admin Panel</title>
+    <link rel="stylesheet" href="/css/cms.css">
+</head>
+<body>
+    <div class="cms-container">
+        <header class="cms-header">
+            <h1>📝 CMS Admin Panel</h1>
+            <a href="/" class="cms-btn cms-btn-secondary">← Site</a>
+        </header>
+
+        <nav class="cms-nav">
+            <button class="cms-nav-btn active" data-section="pages" onclick="CMS.showSection('pages')">📄 Pages</button>
+            <button class="cms-nav-btn" data-section="blog" onclick="CMS.showSection('blog')">📝 Blog</button>
+            <button class="cms-nav-btn" data-section="faq" onclick="CMS.showSection('faq')">❓ FAQ</button>
+        </nav>
+
+        <!-- Pages Section -->
+        <div id="pagesSection" class="cms-section">
+            <div style="margin-bottom: 20px;">
+                <button class="cms-btn cms-btn-primary" onclick="CMS.newPage()">+ New Page</button>
+            </div>
+            <table class="cms-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Slug</th>
+                        <th>Status</th>
+                        <th>Updated</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="pagesTableBody"></tbody>
+            </table>
+        </div>
+
+        <!-- Blog Section -->
+        <div id="blogSection" class="cms-section" style="display:none;">
+            <div style="margin-bottom: 20px;">
+                <button class="cms-btn cms-btn-primary" onclick="CMS.newBlogPost()">+ New Post</button>
+            </div>
+            <table class="cms-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Published</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="blogTableBody"></tbody>
+            </table>
+        </div>
+
+        <!-- FAQ Section -->
+        <div id="faqSection" class="cms-section" style="display:none;">
+            <div style="margin-bottom: 20px;">
+                <button class="cms-btn cms-btn-primary" onclick="CMS.newFAQ()">+ New FAQ</button>
+            </div>
+            <table class="cms-table">
+                <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>Category</th>
+                        <th>Order</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="faqTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Page Editor Modal -->
+    <div id="pageModal" class="cms-modal">
+        <div class="cms-modal-content">
+            <div class="cms-modal-header">
+                <h2>Edit Page</h2>
+                <button class="cms-modal-close" onclick="CMS.hideModal('pageModal')">&times;</button>
+            </div>
+            <form id="pageForm" class="cms-form" onsubmit="CMS.savePage(event)">
+                <input type="hidden" id="pageId">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="pageTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Slug</label>
+                    <input type="text" id="pageSlug" required>
+                </div>
+                <div class="form-group">
+                    <label>Content (HTML)</label>
+                    <textarea id="pageContent" rows="15"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="pageStatus">
+                        <option value="draft">Draft</option>
+                        <option value="published">Published</option>
+                    </select>
+                </div>
+                <button type="submit" class="cms-btn cms-btn-success">Save Page</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Blog Editor Modal -->
+    <div id="blogModal" class="cms-modal">
+        <div class="cms-modal-content">
+            <div class="cms-modal-header">
+                <h2>Edit Blog Post</h2>
+                <button class="cms-modal-close" onclick="CMS.hideModal('blogModal')">&times;</button>
+            </div>
+            <form id="blogForm" class="cms-form" onsubmit="CMS.saveBlogPost(event)">
+                <input type="hidden" id="blogId">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="blogTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Excerpt</label>
+                    <textarea id="blogExcerpt" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Content (HTML)</label>
+                    <textarea id="blogContent" rows="15"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <input type="text" id="blogCategory">
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="blogStatus">
+                        <option value="draft">Draft</option>
+                        <option value="published">Published</option>
+                    </select>
+                </div>
+                <button type="submit" class="cms-btn cms-btn-success">Save Post</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FAQ Editor Modal -->
+    <div id="faqModal" class="cms-modal">
+        <div class="cms-modal-content">
+            <div class="cms-modal-header">
+                <h2>Edit FAQ</h2>
+                <button class="cms-modal-close" onclick="CMS.hideModal('faqModal')">&times;</button>
+            </div>
+            <form id="faqForm" class="cms-form" onsubmit="CMS.saveFAQ(event)">
+                <input type="hidden" id="faqId">
+                <div class="form-group">
+                    <label>Question</label>
+                    <input type="text" id="faqQuestion" required>
+                </div>
+                <div class="form-group">
+                    <label>Answer</label>
+                    <textarea id="faqAnswer" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <input type="text" id="faqCategory">
+                </div>
+                <div class="form-group">
+                    <label>Sort Order</label>
+                    <input type="number" id="faqOrder" value="0">
+                </div>
+                <button type="submit" class="cms-btn cms-btn-success">Save FAQ</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/cms.js"></script>
+</body>
+</html>

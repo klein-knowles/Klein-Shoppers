@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Coupons</title>
+
+<link rel="stylesheet" href="/admin/css/admin.css">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<div id="sidebar"></div>
+
+<div class="main">
+
+<div id="topbar"></div>
+
+<div class="content">
+
+<h2>Coupon Management</h2>
+
+<form id="couponForm">
+
+<div class="form-group">
+
+<label>Coupon Code</label>
+
+<input
+type="text"
+id="code"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Discount Type</label>
+
+<select id="discount_type">
+
+<option value="percentage">
+
+Percentage
+
+</option>
+
+<option value="fixed">
+
+Fixed Amount
+
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Discount Value</label>
+
+<input
+type="number"
+step="0.01"
+id="discount_value"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Minimum Order</label>
+
+<input
+type="number"
+step="0.01"
+id="minimum_order"
+value="0">
+
+</div>
+
+<div class="form-group">
+
+<label>Expiry Date</label>
+
+<input
+type="date"
+id="expiry_date"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Status</label>
+
+<select id="status">
+
+<option value="Active">
+
+Active
+
+</option>
+
+<option value="Inactive">
+
+Inactive
+
+</option>
+
+</select>
+
+</div>
+
+<button type="submit">
+
+Create Coupon
+
+</button>
+
+</form>
+
+<hr>
+
+<table class="admin-table">
+
+<thead>
+
+<tr>
+
+<th>Code</th>
+
+<th>Type</th>
+
+<th>Value</th>
+
+<th>Minimum Order</th>
+
+<th>Expiry</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="couponTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="/admin/js/admin.js"></script>
+
+<script src="/admin/js/coupons.js"></script>
+
+</body>
+
+</html>

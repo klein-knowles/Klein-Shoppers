@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers | Klein Shoppers Admin</title>
+    <link rel="stylesheet" href="/admin/css/admin.css">
+    <style>
+        .customer-toolbar {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .customer-toolbar input {
+            width: min(420px, 100%);
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="sidebar"></div>
+        <div class="main">
+            <div id="topbar"></div>
+
+            <main class="content">
+                <div class="page-header">
+                    <h2>Customers</h2>
+                </div>
+
+                <div class="customer-toolbar">
+                    <input id="customerSearch" type="search" placeholder="Search name, email, or phone">
+                    <button id="refreshCustomers" class="btn-primary" type="button">Refresh</button>
+                </div>
+
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Joined</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersTable">
+                            <tr><td colspan="5" class="empty-message">Loading customers...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="/admin/js/admin.js"></script>
+    <script src="/admin/js/customers.js"></script>
+</body>
+</html>
